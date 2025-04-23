@@ -1,0 +1,188 @@
+[
+  {
+    "name": "AWS Bedrock: Knowledge Base",
+    "key": "aws-bedrock-knowledge-base",
+    "description": "Query and retrieve information from AWS knowledge bases using the Bedrock Agent Runtime.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-aws-kb-retrieval"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/aws-kb-retrieval-server"
+  },
+  {
+    "name": "Brave Search",
+    "key": "brave-search",
+    "description": "Retrieve web pages, news, and local business results via Brave API.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+    "env": {
+      "BRAVE_API_KEY": "{{apiKey@string::Your Brave API key}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/brave-search"
+  },
+  {
+    "name": "Demo (Everything)",
+    "key": "demo-everything",
+    "description": "Test protocol features and tools for client compatibility.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-everything"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/everything"
+  },
+  {
+    "name": "EverArt",
+    "key": "everart",
+    "description": "Integrates with EverArt API to generate images from text prompts using multiple AI models for creative and visual design tasks.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-everart"],
+    "env": {
+      "EVERART_API_KEY": "{{apiKey@string::Your EverArt API key}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/everart"
+  },
+  {
+    "name": "Fetch",
+    "key": "fetch",
+    "description": "Retrieve and convert web content to markdown for analysis.",
+    "command": "uvx",
+    "args": ["mcp-server-fetch"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/fetch"
+  },
+  {
+    "name": "Filesystem",
+    "key": "filesystem",
+    "description": "Read, write, and manipulate local files through a controlled API.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "{{dirs@list::directories you about to access. Trailing slash in path required.}}"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/filesystem"
+  },
+  {
+    "name": "Git",
+    "key": "git",
+    "description": "Interact with local Git repositories for version control tasks.",
+    "command": "uvx",
+    "args": ["mcp-server-git", "--repository", "{{repoPath@string::Git Repository Path}}"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/git"
+  },
+  {
+    "name": "GitHub",
+    "key": "github",
+    "description": "Manage repositories, issues, and search code via GitHub API.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github"],
+    "env": {
+      "GITHUB_TOKEN": "{{token@string::Your GitHub personal access token}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/github"
+  },
+  {
+    "name": "GitLab",
+    "key": "gitlab",
+    "description": "Control repositories, merge requests, and issues via GitLab API.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-gitlab"],
+    "env": {
+      "GITLAB_TOKEN": "{{token@string::Your GitLab personal access token}}",
+      "GITLAB_URL": "{{url@string::Your GitLab instance URL (default: https://gitlab.com)}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/gitlab"
+  },
+  {
+    "name": "Google Drive",
+    "key": "google-drive",
+    "description": "Search and access Google Drive files and folders via read-only API.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+    "env": {
+      "GOOGLE_CREDENTIALS": "{{credentials@string::Your Google API credentials JSON}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/gdrive"
+  },
+  {
+    "name": "Google Maps",
+    "key": "google-maps",
+    "description": "Google Maps is a web mapping platform providing satellite imagery, street maps, 360° views, real-time traffic, and route planning for various travel modes.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-google-maps"],
+    "env": {
+      "GOOGLE_MAPS_API_KEY": "{{apiKey@string::Your Google Maps API key}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/google-maps"
+  },
+  {
+    "name": "Knowledge Graph Memory",
+    "key": "knowledge-graph-memory",
+    "description": "Build and query persistent semantic networks for data management.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-memory"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/memory"
+  },
+  {
+    "name": "PostgreSQL",
+    "key": "postgresql",
+    "description": "Access and analyze Postgres databases with read-only queries.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-postgres", "{{connectionString@string::like postgresql://localhost/db}}"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/postgres"
+  },
+  {
+    "name": "Puppeteer",
+    "key": "puppeteer",
+    "description": "Navigate websites, fill forms, and capture screenshots programmatically.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/puppeteer"
+  },
+  {
+    "name": "Redis",
+    "key": "redis",
+    "description": "Integrates Redis to enable set/get/delete/list operations on Redis instances",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-redis"],
+    "env": {
+      "REDIS_URL": "{{url@string::Your Redis connection URL}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/redis"
+  },
+  {
+    "name": "SQLite",
+    "key": "sqlite",
+    "description": "Query and analyze SQLite databases directly.",
+    "command": "uvx",
+    "args": ["mcp-server-sqlite", "--db-path", "{{dbPath@string::Sqlite database file path}}"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/sqlite"
+  },
+  {
+    "name": "Sentry",
+    "key": "sentry",
+    "description": "Retrieve and analyze application error reports for debugging support.",
+    "command": "uvx",
+    "args": ["mcp-server-sentry", "--auth-token", "{{authToken@string::Get the auth token from https://sentry.io/}}"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/sentry"
+  },
+  {
+    "name": "Sequential Thinking",
+    "key": "sequential-thinking",
+    "description": "Implements a structured sequential thinking process for breaking down complex problems, iteratively refining solutions, and exploring multiple reasoning paths.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/sequentialthinking"
+  },
+  {
+    "name": "Slack",
+    "key": "slack",
+    "description": "Send messages, manage channels, and access workspace history.",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-slack"],
+    "env": {
+      "SLACK_BOT_TOKEN": "{{botToken@string::Your slack bot token}}",
+      "SLACK_TEAM_ID": "{{teamId@string::Your slack team id}}"
+    },
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/slack"
+  },
+  {
+    "name": "Time",
+    "key": "time",
+    "description": "MCP server providing time and timezone conversion tools for AI assistants to handle localized time data and calculations.",
+    "command": "uvx",
+    "args": ["mcp-server-time", "--local-timezone={{timezone@string::like Asia/Shanghai. You may need install tzdata first}}"],
+    "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/time"
+  }
+]
