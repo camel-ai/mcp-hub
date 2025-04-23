@@ -1,0 +1,346 @@
+[
+  {
+    "name": "Apify RAG Web Browser",
+    "key": "apify-rag-web-browser",
+    "description": "Perform web searches and extract cleaned content via integration with Apify's RAG Web Browser Actor.",
+    "command": "npx",
+    "args": ["-y", "@apify/mcp-server-rag-web-browser"],
+    "env": {
+      "APIFY_API_TOKEN": "{{apiToken@string::Your Apify API token}}"
+    },
+    "homepage": "https://github.com/apify/mcp-server-rag-web-browser"
+  },
+  {
+    "name": "Astra DB",
+    "key": "astra-db",
+    "description": "Integrates with Astra DB, enabling cloud-native database operations for scalable data storage and retrieval in AI applications.",
+    "command": "npx",
+    "args": ["-y", "@datastax/astra-db-mcp"],
+    "env": {
+      "ASTRA_DB_APPLICATION_TOKEN": "{{token@string::Your Astra DB application token}}",
+      "ASTRA_DB_API_ENDPOINT": "{{endpoint@string::Your Astra DB API endpoint}}"
+    },
+    "homepage": "https://github.com/datastax/astra-db-mcp"
+  },
+  {
+    "name": "Bing Search",
+    "key": "bing-search",
+    "description": "Search the web using Bing services.",
+    "command": "uvx",
+    "args": ["mcp-server-bing-search"],
+    "env": {
+      "BING_SEARCH_API_KEY": "{{apiKey@string::Your Bing Search API key}}"
+    },
+    "homepage": "https://github.com/microsoft/semanticworkbench/tree/HEAD/mcp-servers/mcp-server-bing-search"
+  },
+  {
+    "name": "Cloudflare",
+    "key": "cloudflare",
+    "description": "Manage KV stores, R2 storage, D1 databases, and Workers deployments.",
+    "command": "npx",
+    "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+    "env": {
+      "CLOUDFLARE_API_TOKEN": "{{apiToken@string::Your Cloudflare API token}}"
+    },
+    "homepage": "https://github.com/cloudflare/mcp-server-cloudflare"
+  },
+  {
+    "name": "Cloudflare Workers",
+    "key": "cloudflare-workers",
+    "description": "Enables MCP capabilities in Cloudflare Workers for deploying low-latency, scalable AI services at the network edge.",
+    "command": "npx",
+    "args": ["-y", "@cloudflare/workers-mcp"],
+    "homepage": "https://github.com/cloudflare/workers-mcp"
+  },
+  {
+    "name": "DeepSRT",
+    "key": "deepsrt",
+    "description": "Integrates with DeepSRT's API to generate multi-language video summaries in narrative or bullet-point formats, leveraging content caching and CDN edge delivery for efficient retrieval.",
+    "command": "npx",
+    "args": ["-y", "@deepsrt/deepsrt-mcp"],
+    "env": {
+      "DEEPSRT_API_KEY": "{{apiKey@string::Your DeepSRT API key}}"
+    },
+    "homepage": "https://github.com/DeepSRT/deepsrt-mcp"
+  },
+  {
+    "name": "E2B (JS)",
+    "key": "e2b-js",
+    "description": "Execute code securely in cloud sandboxes.",
+    "command": "npx",
+    "args": ["-y", "@e2b/mcp-server-js"],
+    "env": {
+      "E2B_API_KEY": "{{apiKey@string::Your E2B API key}}"
+    },
+    "homepage": "https://github.com/e2b-dev/mcp-server/tree/HEAD/packages/js"
+  },
+  {
+    "name": "E2B (Python)",
+    "key": "e2b-python",
+    "description": "Execute code securely in cloud sandboxes.",
+    "command": "uvx",
+    "args": ["e2b-mcp-server"],
+    "env": {
+      "E2B_API_KEY": "{{apiKey@string::Your E2B API key}}"
+    },
+    "homepage": "https://github.com/e2b-dev/mcp-server/tree/HEAD/packages/python"
+  },
+  {
+    "name": "Exa Web Search",
+    "key": "exa-web-search",
+    "description": "Query Exa API to retrieve structured search results.",
+    "command": "npx",
+    "args": ["-y", "exa-mcp-server"],
+    "env": {
+      "EXA_API_KEY": "{{apiKey@string::Your Exa API key}}"
+    },
+    "homepage": "https://github.com/exa-labs/exa-mcp-server"
+  },
+  {
+    "name": "Firecrawl",
+    "key": "firecrawl",
+    "description": "Integration with FireCrawl to provide advanced web scraping capabilities for extracting structured data from complex websites.",
+    "command": "npx",
+    "args": ["-y", "firecrawl-mcp"],
+    "env": {
+      "FIRECRAWL_API_KEY": "{{apiKey@string::Get the api key from https://firecrawl.dev/}}"
+    },
+    "homepage": "https://github.com/mendableai/firecrawl-mcp-server"
+  },
+  {
+    "name": "ForeverVM",
+    "key": "forevervm",
+    "description": "Enable long-running Python REPL execution on a remote machine",
+    "command": "npx",
+    "args": ["-y", "@jamsocket/forevervm-mcp"],
+    "homepage": "https://github.com/jamsocket/forevervm/tree/HEAD/javascript/mcp-server"
+  },
+  {
+    "name": "Genkit",
+    "key": "genkit",
+    "description": "Consume MCP resources or expose Genkit tools as server.",
+    "command": "npx",
+    "args": ["-y", "@firebase/genkit-mcp"],
+    "homepage": "https://github.com/firebase/genkit/tree/HEAD/js/plugins/mcp"
+  },
+  {
+    "name": "Graphlit",
+    "key": "graphlit",
+    "description": "Integrates with the Graphlit platform to enable natural language processing tasks and data retrieval from the Graphlit ecosystem.",
+    "command": "npx",
+    "args": ["-y", "graphlit-mcp-server"],
+    "env": {
+      "GRAPHLIT_ORGANIZATION_ID": "{{orgId@string::Get the Organization Id from https://portal.graphlit.dev/}}",
+      "GRAPHLIT_ENVIRONMENT_ID": "{{envId@string::Get the Environment Id from https://portal.graphlit.dev/}}",
+      "GRAPHLIT_JWT_SECRET": "{{jwtSecret@string::Get the JWT Secret from https://portal.graphlit.dev/}}"
+    },
+    "homepage": "https://github.com/graphlit/graphlit-mcp-server"
+  },
+  {
+    "name": "JSON Resume Enhancer",
+    "key": "json-resume-enhancer",
+    "description": "Enhances JSON Resumes with GitHub project information by analyzing codebases, fetching existing resumes, and intelligently updating profiles with relevant project details using OpenAI's API.",
+    "command": "npx",
+    "args": ["-y", "@jsonresume/mcp"],
+    "env": {
+      "OPENAI_API_KEY": "{{apiKey@string::Your OpenAI API key}}"
+    },
+    "homepage": "https://github.com/jsonresume/mcp"
+  },
+  {
+    "name": "JetBrains IDE",
+    "key": "jetbrains-ide",
+    "description": "Interact with JetBrains IDEs for code analysis and development tasks.",
+    "command": "npx",
+    "args": ["-y", "@jetbrains/mcp-jetbrains"],
+    "homepage": "https://github.com/JetBrains/mcp-jetbrains"
+  },
+  {
+    "name": "Kagi Search",
+    "key": "kagi-search",
+    "description": "Integrates Kagi's advanced search capabilities into workflows, enabling high-quality, privacy-focused web information retrieval for informed decision-making and analysis.",
+    "command": "uvx",
+    "args": ["kagimcp"],
+    "env": {
+      "KAGI_API_KEY": "{{apiKey@string::Your Kagi API key}}"
+    },
+    "homepage": "https://github.com/kagisearch/kagimcp"
+  },
+  {
+    "name": "Linkup Search",
+    "key": "linkup-search",
+    "description": "Integrates with Linkup Technologies' API to enable web searches for information gathering, fact-checking, and research tasks.",
+    "command": "uvx",
+    "args": ["linkup-mcp-server"],
+    "env": {
+      "LINKUP_API_KEY": "{{apiKey@string::Your Linkup API key}}"
+    },
+    "homepage": "https://github.com/LinkupPlatform/python-mcp-server"
+  },
+  {
+    "name": "LlamaCloud",
+    "key": "llamacloud",
+    "description": "Query managed vector indexes for knowledge retrieval.",
+    "command": "npx",
+    "args": ["-y", "@llamaindex/mcp-server-llamacloud"],
+    "env": {
+      "LLAMACLOUD_API_KEY": "{{apiKey@string::Your LlamaCloud API key}}"
+    },
+    "homepage": "https://github.com/run-llama/mcp-server-llamacloud"
+  },
+  {
+    "name": "Microsoft Word",
+    "key": "microsoft-word",
+    "description": "Interact with Microsoft Word.",
+    "command": "uvx",
+    "args": ["mcp-server-word"],
+    "homepage": "https://github.com/microsoft/semanticworkbench/tree/0ee48d2544340d702d1674bc0611b001795f3ed5/mcp-servers"
+  },
+  {
+    "name": "Milvus",
+    "key": "milvus",
+    "description": "Milvus is an open-source vector database that stores and manages high-dimensional vectors, enabling efficient similarity searches in applications like AI and machine learning.",
+    "command": "uvx",
+    "args": ["mcp-server-milvus"],
+    "env": {
+      "MILVUS_URI": "{{uri@string::Your Milvus URI}}",
+      "MILVUS_TOKEN": "{{token@string::Your Milvus token (if needed)}}"
+    },
+    "homepage": "https://github.com/zilliztech/mcp-server-milvus"
+  },
+  {
+    "name": "MotherDuck & DuckDB",
+    "key": "motherduck-duckdb",
+    "description": "Dynamic, reprogrammable MCP Server. You use it to discover and install other MCP servers from mcp.run, which then appear in your MCP Client ready to use - no additional configuration needed.",
+    "command": "uvx",
+    "args": ["mcp-server-motherduck"],
+    "env": {
+      "MOTHERDUCK_TOKEN": "{{token@string::Your MotherDuck token}}"
+    },
+    "homepage": "https://github.com/motherduckdb/mcp-server-motherduck"
+  },
+  {
+    "name": "Neo4j Graph",
+    "key": "neo4j-graph",
+    "description": "Interact with Neo4j graph databases to query, analyze, and manipulate data.",
+    "command": "npx",
+    "args": ["-y", "@neo4j/mcp-neo4j"],
+    "env": {
+      "NEO4J_URI": "{{uri@string::Your Neo4j URI}}",
+      "NEO4J_USERNAME": "{{username@string::Your Neo4j username}}",
+      "NEO4J_PASSWORD": "{{password@string::Your Neo4j password}}"
+    },
+    "homepage": "https://github.com/neo4j-contrib/mcp-neo4j"
+  },
+  {
+    "name": "Neon",
+    "key": "neon",
+    "description": "Manage Neon's serverless Postgres databases.",
+    "command": "npx",
+    "args": ["-y", "@neondatabase/mcp-server-neon", "init", "{{apiKey@string::NEON_API_KEY}}"],
+    "homepage": "https://github.com/neondatabase-labs/mcp-server-neon"
+  },
+  {
+    "name": "PostgREST (Supabase)",
+    "key": "postgrest-supabase",
+    "description": "Connects to Supabase projects using PostgREST, or standalone PostgREST servers, enabling natural language querying and management of PostgreSQL data.",
+    "command": "npx",
+    "args": ["-y", "@supabase/mcp-server-postgrest"],
+    "env": {
+      "POSTGREST_URL": "{{url@string::Your PostgREST URL}}",
+      "POSTGREST_API_KEY": "{{apiKey@string::Your PostgREST API key (if needed)}}"
+    },
+    "homepage": "https://github.com/supabase-community/mcp-supabase/tree/HEAD/packages/mcp-server-postgrest"
+  },
+  {
+    "name": "Qdrant",
+    "key": "qdrant",
+    "description": "Store and retrieve vector-based memories for AI systems.",
+    "command": "uvx",
+    "args": ["mcp-server-qdrant"],
+    "env": {
+      "QDRANT_URL": "{{url@string::Your Qdrant URL}}",
+      "QDRANT_API_KEY": "{{apiKey@string::Your Qdrant API key (if needed)}}"
+    },
+    "homepage": "https://github.com/qdrant/mcp-server-qdrant"
+  },
+  {
+    "name": "SourceSync.ai",
+    "key": "sourcesync-ai",
+    "description": "Integrates with SourceSync.ai's knowledge management platform to enable semantic search, document management, and content ingestion from diverse sources for AI-driven knowledge retrieval and document analysis.",
+    "command": "npx",
+    "args": ["-y", "@sourcesync/sourcesyncai-mcp"],
+    "env": {
+      "SOURCESYNC_API_KEY": "{{apiKey@string::Your SourceSync.ai API key}}"
+    },
+    "homepage": "https://github.com/scmdr/sourcesyncai-mcp"
+  },
+  {
+    "name": "Stripe Agent Toolkit",
+    "key": "stripe-agent-toolkit",
+    "description": "Integrates with Stripe's API to enable payment processing, customer management, and financial operations for e-commerce and billing workflows.",
+    "command": "npx",
+    "args": ["-y", "@stripe/agent-toolkit"],
+    "env": {
+      "STRIPE_API_KEY": "{{apiKey@string::Your Stripe API key}}"
+    },
+    "homepage": "https://github.com/stripe/agent-toolkit"
+  },
+  {
+    "name": "Tavily Search",
+    "key": "tavily-search",
+    "description": "Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.",
+    "command": "npx",
+    "args": ["-y", "tavily-mcp@0.1.2"],
+    "env": {
+      "TAVILY_API_KEY": "{{apiKey@string::You can get the API key from https://tavily.com}}"
+    },
+    "homepage": "https://github.com/tavily-ai/tavily-mcp"
+  },
+  {
+    "name": "TiDB",
+    "key": "tidb",
+    "description": "TiDB Cloud Serverless is built to handle dynamic and unpredictable workloads, making it ideal for modern, cloud-native applications.",
+    "command": "uvx",
+    "args": ["mcp-server-tidb"],
+    "env": {
+      "TIDB_HOST": "{{host@string::Your TiDB host}}",
+      "TIDB_PORT": "{{port@string::Your TiDB port}}",
+      "TIDB_USER": "{{user@string::Your TiDB username}}",
+      "TIDB_PASSWORD": "{{password@string::Your TiDB password}}",
+      "TIDB_DATABASE": "{{database@string::Your TiDB database name}}"
+    },
+    "homepage": "https://github.com/c4pt0r/mcp-server-tidb"
+  },
+  {
+    "name": "Tinybird",
+    "key": "tinybird",
+    "description": "Query and analyze large datasets using Tinybird analytics.",
+    "command": "uvx",
+    "args": ["mcp-tinybird"],
+    "env": {
+      "TINYBIRD_TOKEN": "{{token@string::Your Tinybird token}}"
+    },
+    "homepage": "https://github.com/tinybirdco/mcp-tinybird"
+  },
+  {
+    "name": "Upstash",
+    "key": "upstash",
+    "description": "Integrates with Upstash's Developer APIs to enable natural language management of Redis databases.",
+    "command": "npx",
+    "args": ["-y", "@upstash/mcp-server"],
+    "env": {
+      "UPSTASH_REDIS_REST_URL": "{{url@string::Your Upstash Redis REST URL}}",
+      "UPSTASH_REDIS_REST_TOKEN": "{{token@string::Your Upstash Redis REST token}}"
+    },
+    "homepage": "https://github.com/upstash/mcp-server"
+  },
+  {
+    "name": "VSCode",
+    "key": "vscode",
+    "description": "VSCode tools and resources as a Model Context Protocol (MCP) server in a VSCode extension",
+    "command": "npx",
+    "args": ["-y", "@microsoft/mcp-server-vscode"],
+    "homepage": "https://github.com/microsoft/semanticworkbench/tree/HEAD/mcp-servers/mcp-server-vscode"
+  }
+]
