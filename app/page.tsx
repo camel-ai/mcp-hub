@@ -17,8 +17,8 @@ import { Check, Copy, ShieldCheck, Grid2X2 } from "lucide-react";
 
 // 给每个服务器添加来源标记
 const serversWithSource = [
-  ...anthropicsServers.map(server => ({ ...server, source: 'anthropic' })),
-  ...officialsServers.map(server => ({ ...server, source: 'official' }))
+  ...anthropicsServers.map(server => ({ ...server, source: 'anthropic' as const })),
+  ...officialsServers.map(server => ({ ...server, source: 'official' as const }))
 ];
 
 // 按名称字母顺序排序
@@ -31,7 +31,9 @@ interface Server {
   key: string;
   description: string;
   command: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   args?: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   env?: Record<string, any>;
   homepage: string;
   source?: 'anthropic' | 'official';
