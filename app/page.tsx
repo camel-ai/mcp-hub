@@ -210,7 +210,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 w-full">
+        <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
           {filteredServers.map((server) => (
             <Card
               key={server.key}
@@ -242,7 +242,7 @@ export default function Home() {
                   className="text-xs p-0 h-auto"
                   onClick={() => window.open(server.homepage, '_blank')}
                 >
-                  {new URL(server.homepage).hostname}
+                  {new URL(server.homepage).pathname.split('/')[1] || 'home'}
                 </Button>
               </CardFooter>
             </Card>

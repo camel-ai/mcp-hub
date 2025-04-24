@@ -28,7 +28,7 @@ interface RotatingTextProps {
   mainClassName?: string;
   splitLevelClassName?: string;
   elementLevelClassName?: string;
-  [key: string]: any;
+  [key: string]: React.HTMLAttributes<HTMLSpanElement>[keyof React.HTMLAttributes<HTMLSpanElement>] | string[] | Transition | Variant | undefined;
 }
 
 interface RotatingTextRef {
