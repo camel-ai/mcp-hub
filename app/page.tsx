@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import anthropicsServers from "@/public/anthropics.json";
-import officialsServers from "@/public/officials.json";
+import { anthropicServers, officialServers } from "@/public/servers";
 import {
   Card,
   CardDescription,
@@ -21,8 +20,8 @@ import { Header } from "@/components/header";
 
 // 给每个服务器添加来源标记
 const serversWithSource = [
-  ...anthropicsServers.map(server => ({ ...server, source: 'anthropic' as const })),
-  ...officialsServers.map(server => ({ ...server, source: 'official' as const }))
+  ...anthropicServers.map(server => ({ ...server, source: 'anthropic' as const })),
+  ...officialServers.map(server => ({ ...server, source: 'official' as const }))
 ];
 
 // 按名称字母顺序排序

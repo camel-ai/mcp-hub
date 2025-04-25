@@ -1,4 +1,3 @@
-import RotatingText from "@/components/rotating-text"
 import { motion } from "framer-motion"
 
 export function Header() {
@@ -14,24 +13,7 @@ export function Header() {
               layout
               transition={{ type: "spring", damping: 30, stiffness: 400 }}
             >
-              CAMEL with{" "}
-            </motion.span>
-            <RotatingText
-              texts={['Notion', 'Whatsapp', 'Firecrawl']}
-              mainClassName="px-2 sm:px-2 md:px-3 bg-primary text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-              staggerFrom={"last"}
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.05}
-              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-            />
-            <motion.span
-              layout
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-            >
-              {" "}MCP
+              CAMEL with MCP
             </motion.span>
           </motion.div>
         </div>
