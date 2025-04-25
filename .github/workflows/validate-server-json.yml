@@ -1,0 +1,25 @@
+name: Validate Server JSON Files
+
+on:
+  pull_request:
+    paths:
+      - 'public/servers/**/*.json'
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate Server JSON Files
+        run: node .github/scripts/validate-server-json.js
