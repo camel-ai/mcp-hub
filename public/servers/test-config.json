@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Apify RAG Web Browser",
+    "key": "apify-rag-web-browser",
+    "description": "Perform web searches and extract cleaned content via integration with Apify's RAG Web Browser Actor.",
+    "command": "npx",
+    "args": ["-y", "@apify/mcp-server-rag-web-browser"],
+    "env": {
+      "APIFY_API_TOKEN": "{{apiToken@string::Your Apify API token}}"
+    }
+  },
+  {
+    "key": "astra-db",
+    "description": "Integrates with Astra DB, enabling cloud-native database operations for scalable data storage and retrieval in AI applications.",
+    "command": "npx",
+    "args": ["-y", "@datastax/astra-db-mcp"],
+    "env": {
+      "ASTRA_DB_APPLICATION_TOKEN": "{{token@string::Your Astra DB application token}}",
+      "ASTRA_DB_API_ENDPOINT": "{{endpoint@string::Your Astra DB API endpoint}}"
+    },
+    "homepage": "https://github.com/datastax/astra-db-mcp"
+  }
+]
