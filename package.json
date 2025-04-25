@@ -1,7 +1,20 @@
 {
-  "name": "mcp-server",
+  "name": "mcp-hub",
   "version": "0.1.0",
   "private": true,
+  "description": "A comprehensive hub for MCP (Model Context Protocol) servers and integrations",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "camel-ai",
+    "servers",
+    "hub",
+    "catalog",
+    "registry"
+  ],
+  "author": "CAMEL-AI.org",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

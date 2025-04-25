@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MCP Hub - Model Context Protocol Server
+
+A comprehensive hub for MCP (Model Context Protocol) servers and integrations designed to supercharge AI agents and multi-agent workflows.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20.x or higher
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/camel-ai/mcp-hub.git
+cd mcp-hub
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Server Data Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The core of this project is the server data stored in JSON files. The application uses two main JSON files to catalog MCP servers:
 
-## Learn More
+- `public/servers/anthropics.json`: Contains Anthropic MCP servers
+- `public/servers/officials.json`: Contains official MCP servers
 
-To learn more about Next.js, take a look at the following resources:
+Each server entry follows this structure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{
+  "name": "Server Name",
+  "key": "server-key",
+  "description": "Description of the server functionality",
+  "command": "npx",
+  "args": ["-y", "@package/server-name"],
+  "env": {
+    "API_KEY": "{{apiKey@string::Your API key}}"
+  },
+  "homepage": "https://github.com/org/repo"
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Adding New Servers
 
-## Deploy on Vercel
+To add new servers to the catalog:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Add the server information to either `anthropics.json` or `officials.json`
+2. Follow the existing structure for consistency
+3. The changes will be automatically reflected in the UI
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This collaborative approach allows the community to maintain an up-to-date catalog of MCP servers.
+
+## Deployment
+
+### Using Docker
+
+Build and run the Docker image:
+
+```bash
+# Build the image
+docker build -t mcp-hub:latest .
+
+# Run the container
+docker run -p 3000:3000 mcp-hub:latest
+```
+
+### Deploying to Vercel
+
+The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+```bash
+npm install -g vercel
+vercel
+```
+
+## Technologies
+
+- [Next.js](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) - UI component library
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+- [Lucide React](https://lucide.dev/) - Icon library
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+
+- [Model Context Protocol](https://github.com/modelcontextprotocol) - For creating the MCP standard
+- [Anthropic](https://www.anthropic.com/) - For their contributions to the MCP ecosystem
+- [CAMEL-AI](https://camel-ai.org/) - For hosting and maintaining the MCP Hub
