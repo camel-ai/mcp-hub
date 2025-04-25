@@ -7,9 +7,11 @@
     "args": ["-y", "@apify/mcp-server-rag-web-browser"],
     "env": {
       "APIFY_API_TOKEN": "{{apiToken@string::Your Apify API token}}"
-    }
+    },
+    "homepage": "https://github.com/apify/mcp-server-rag-web-browser"
   },
   {
+    "name": "Astra DB",
     "key": "astra-db",
     "description": "Integrates with Astra DB, enabling cloud-native database operations for scalable data storage and retrieval in AI applications.",
     "command": "npx",
