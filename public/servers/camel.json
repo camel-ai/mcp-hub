@@ -1,0 +1,13 @@
+[
+  {
+    "name": "camel-tool",
+    "key": "camel-tool",
+    "description": "add description here",
+    "command": "uvx",
+    "args": ["add args here"],
+    "env": {
+      "add env name here": "add env value here"
+    },
+    "homepage": "add homepage here"
+  }
+]

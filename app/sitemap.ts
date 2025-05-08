@@ -1,28 +1,29 @@
 import { MetadataRoute } from 'next';
-import { anthropicServers, officialServers } from "@/public/servers";
+import { anthropicServers, officialServers, camelServers } from "@/public/servers";
 
-// 合并所有服务器数据
+// Merge all server data
 const serversWithSource = [
   ...anthropicServers.map(server => ({ ...server, source: 'anthropic' })),
-  ...officialServers.map(server => ({ ...server, source: 'official' }))
+  ...officialServers.map(server => ({ ...server, source: 'official' })),
+  ...camelServers.map(server => ({ ...server, source: 'camel' }))
 ];
 
-// 按名称排序
+// Sort by name
 const allServers = serversWithSource.sort((a, b) =>
   a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
 );
 
-// 网站基础URL - 生产环境使用实际域名，开发环境使用localhost
+// Base site URL - use actual domain in production, localhost in development
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
                process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
                'https://mcp.camel-ai.org';
 
-// 获取当前日期作为lastModified
+// Get current date as lastModified
 const currentDate = new Date();
 
-// 生成sitemap
+// Generate sitemap
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 创建基础页面的sitemap条目
+  // Create sitemap entries for base pages
   const routes = [
     {
       url: baseUrl,
@@ -31,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      // 添加服务器列表页
+      // Add server list page
       url: `${baseUrl}/servers`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -39,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ] as MetadataRoute.Sitemap;
 
-  // 为每个服务器创建单独的sitemap条目
+  // Create individual sitemap entries for each server
   allServers.forEach((server) => {
     routes.push({
       url: `${baseUrl}/servers/${server.key}`,
@@ -49,7 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 按来源分类的页面
+  // Pages categorized by source
   routes.push(
     {
       url: `${baseUrl}/servers/source/official`,
@@ -59,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/servers/source/anthropic`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/servers/source/camel`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
