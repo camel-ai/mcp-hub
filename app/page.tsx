@@ -18,13 +18,11 @@ import { Check, Copy, ShieldCheck, Grid2X2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/header";
 
-// 给每个服务器添加来源标记
 const serversWithSource = [
   ...anthropicServers.map(server => ({ ...server, source: 'anthropic' as const })),
   ...officialServers.map(server => ({ ...server, source: 'official' as const }))
 ];
 
-// 按名称字母顺序排序
 const allServers = serversWithSource.sort((a, b) =>
   a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
 );
@@ -48,32 +46,27 @@ interface ModalProps {
 }
 
 function Modal({ server, onClose }: ModalProps) {
-  // Create a config object that matches Claude client format
   const serverConfig = {
     command: server.command,
     ...(server.args && { args: server.args }),
     ...(server.env && { env: server.env })
   };
 
-  // Create the final config object using the server's key as property name
   const configObject = {
     mcpServers: {
       [server.key.toLowerCase()]: serverConfig
     }
   };
 
-  // Convert the config object to a formatted JSON string
   const formattedConfig = JSON.stringify(configObject, null, 2);
 
-  // State to track if config has been copied
   const [copied, setCopied] = useState(false);
 
-  // Function to copy config to clipboard
   const copyToClipboard = () => {
     navigator.clipboard.writeText(formattedConfig)
       .then(() => {
         setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+        setTimeout(() => setCopied(false), 2000)
       })
       .catch(err => {
         console.error('Copy failed:', err);
@@ -174,7 +167,6 @@ export default function Home() {
     setIsModalOpen(false);
   };
 
-  // 根据筛选条件过滤服务器列表
   const filteredServers = allServers.filter(server => {
     if (filter === 'all') return true;
     return server.source === filter;

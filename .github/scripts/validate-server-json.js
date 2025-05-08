@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// 定义所有服务器JSON文件必须包含的字段
 const requiredFields = ['name', 'key', 'description', 'command', 'homepage'];
 
 function validateJsonFile(filePath, requiredFieldsList) {
@@ -57,17 +56,14 @@ function validateJsonFile(filePath, requiredFieldsList) {
     }
 }
 
-// 验证 public/servers/ 目录下的所有JSON文件
 const rootDir = process.cwd();
 const serversDir = path.join(rootDir, 'public', 'servers');
 
-// 检查目录是否存在
 if (!fs.existsSync(serversDir)) {
     console.error(`Error: Directory ${serversDir} does not exist`);
     process.exit(1);
 }
 
-// 获取目录中的所有JSON文件
 let jsonFiles = [];
 
 function findJsonFiles(dir) {
@@ -78,16 +74,13 @@ function findJsonFiles(dir) {
         const stat = fs.statSync(filePath);
 
         if (stat.isDirectory()) {
-            // 递归遍历子目录
             findJsonFiles(filePath);
         } else if (file.endsWith('.json')) {
-            // 添加JSON文件到列表
             jsonFiles.push(filePath);
         }
     });
 }
 
-// 开始搜索JSON文件
 findJsonFiles(serversDir);
 
 if (jsonFiles.length === 0) {
@@ -95,7 +88,6 @@ if (jsonFiles.length === 0) {
     process.exit(0);
 }
 
-// 验证每个JSON文件
 let hasErrors = false;
 
 jsonFiles.forEach(jsonFile => {
