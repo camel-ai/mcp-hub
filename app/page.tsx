@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { anthropicServers, officialServers } from "@/public/servers";
+import { anthropicServers, officialServers, camelServers } from "@/public/servers";
 import {
   Card,
   CardDescription,
@@ -20,7 +20,8 @@ import { Header } from "@/components/header";
 
 const serversWithSource = [
   ...anthropicServers.map(server => ({ ...server, source: 'anthropic' as const })),
-  ...officialServers.map(server => ({ ...server, source: 'official' as const }))
+  ...officialServers.map(server => ({ ...server, source: 'official' as const })),
+  ...camelServers.map(server => ({ ...server, source: 'camel' as const }))
 ];
 
 const allServers = serversWithSource.sort((a, b) =>
@@ -37,7 +38,7 @@ interface Server {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   env?: Record<string, any>;
   homepage: string;
-  source?: 'anthropic' | 'official';
+  source?: 'anthropic' | 'official' | 'camel';
 }
 
 interface ModalProps {
