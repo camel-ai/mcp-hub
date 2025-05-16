@@ -1,8 +1,8 @@
 [
   {
-    "name": "Camel Toolkits",
+    "name": "CAMEL Toolkits",
     "key": "camel-toolkits",
-    "description": "A lightweight server that exports Camel framework toolkits as MCP-compatible tools.",
+    "description": "A lightweight server that exports CAMEL framework toolkits as MCP-compatible tools.",
     "command": "uvx",
     "args": ["camel-toolkits-mcp"],
     "env": {

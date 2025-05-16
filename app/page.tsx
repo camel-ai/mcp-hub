@@ -203,7 +203,7 @@ export default function Home() {
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'camel' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
               <Image src="/camel-icon.svg" alt="Camel" width={16} height={16} />
-              Camel
+              CAMEL
             </button> 
             <button
               onClick={() => setFilter('official')}
