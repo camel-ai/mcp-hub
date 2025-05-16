@@ -101,6 +101,14 @@ function Modal({ server, onClose }: ModalProps) {
               <h2 className="text-2xl font-bold flex items-center gap-4 mb-2">
                 {server.source === 'official' ? (
                   <ShieldCheck className="w-6 h-6 text-[#4215cc] flex-shrink-0" />
+                ) : server.source === 'camel' ? (
+                  <Image
+                    src="/camel-icon.svg"
+                    alt="Camel"
+                    width={24}
+                    height={24}
+                    className="flex-shrink-0"
+                  />
                 ) : (
                   <Image
                     src="/anthropic.svg"
@@ -119,7 +127,11 @@ function Modal({ server, onClose }: ModalProps) {
             </Button>
           </div>
           <div className="flex justify-between items-center pb-6 border-t ">
-              <Badge>{server.command}</Badge>
+              <Badge
+                variant={server.command === 'uvx' ? 'secondary' : server.command === 'npx' ? 'pink' : undefined}
+              >
+                {server.command}
+              </Badge>
               <Button
                 variant="link"
                 size="sm"
@@ -157,7 +169,7 @@ function Modal({ server, onClose }: ModalProps) {
 export default function Home() {
   const [selectedServer, setSelectedServer] = useState<Server | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filter, setFilter] = useState<'all' | 'official' | 'anthropic'>('all');
+  const [filter, setFilter] = useState<'all' | 'official' | 'anthropic' | 'camel'>('all');
 
   const handleCardClick = (server: Server) => {
     setSelectedServer(server);
@@ -187,6 +199,13 @@ export default function Home() {
               All
             </button>
             <button
+              onClick={() => setFilter('camel')}
+              className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'camel' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
+            >
+              <Image src="/camel-icon.svg" alt="Camel" width={16} height={16} />
+              Camel
+            </button> 
+            <button
               onClick={() => setFilter('official')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'official' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
@@ -213,12 +232,20 @@ export default function Home() {
                 <CardTitle className="flex items-center gap-2">
                   {server.source === 'official' ? (
                     <ShieldCheck className="w-6 h-6 text-primary flex-shrink-0" />
+                  ) : server.source === 'camel' ? (
+                    <Image
+                      src="/camel-icon.svg"
+                      alt="Camel"
+                      width={24}
+                      height={24}
+                      className="flex-shrink-0"
+                    />
                   ) : (
                     <Image
                       src="/anthropic.svg"
                       alt="Anthropic"
-                      width={16}
-                      height={16}
+                      width={24}
+                      height={24}
                       className="flex-shrink-0"
                     />
                   )}
@@ -227,7 +254,11 @@ export default function Home() {
                 <CardDescription className="h-20 line-clamp-4">{server.description}</CardDescription>
               </CardHeader>
               <CardFooter className="flex justify-between">
-                <Badge variant="secondary" className="font-bold">{server.command}</Badge>
+                <Badge
+                  variant={server.command === 'uvx' ? 'secondary' : server.command === 'npx' ? 'pink' : undefined}
+                >
+                  {server.command}
+                </Badge>
                 <Button
                   variant="link"
                   size="sm"
