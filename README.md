@@ -40,8 +40,8 @@ yarn dev
 
 The core of this project is the server data stored in JSON files. The application uses two main JSON files to catalog MCP servers:
 
-- `public/servers/anthropics.json`: Contains Anthropic MCP servers
-- `public/servers/officials.json`: Contains official MCP servers
+- `public/servers/anthropic.json`: Contains Anthropic MCP servers
+- `public/servers/official.json`: Contains official MCP servers
 
 Each server entry follows this structure:
 
@@ -63,7 +63,7 @@ Each server entry follows this structure:
 
 To add new servers to the catalog:
 
-1. Add the server information to either `anthropics.json` or `officials.json`
+1. Add the server information to either `anthropic.json` or `official.json`
 2. Follow the existing structure for consistency
 3. The changes will be automatically reflected in the UI
 

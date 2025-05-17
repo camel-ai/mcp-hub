@@ -1,5 +1,5 @@
-import anthropicServers from "./anthropics.json";
-import officialServers from "./officials.json";
+import anthropicServers from "./anthropic.json";
+import officialServers from "./official.json";
 import camelServers from "./camel.json";
 
 export { anthropicServers, officialServers, camelServers };
