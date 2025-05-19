@@ -49,8 +49,8 @@ yarn dev
 
 本项目的核心是存储在JSON文件中的服务器数据。应用程序使用两个主要的JSON文件来目录化MCP服务器：
 
-- `public/servers/anthropics.json`：包含Anthropic相关的MCP服务器
-- `public/servers/officials.json`：包含官方MCP服务器
+- `public/servers/anthropic.json`：包含Anthropic相关的MCP服务器
+- `public/servers/official.json`：包含官方MCP服务器
 
 每个服务器条目遵循以下结构：
 
@@ -72,7 +72,7 @@ yarn dev
 
 要向目录添加新服务器：
 
-1. 将服务器信息添加到`anthropics.json`或`officials.json`
+1. 将服务器信息添加到`anthropic.json`或`official.json`
 2. 遵循现有结构以保持一致性
 3. 更改将自动反映在UI中
 
