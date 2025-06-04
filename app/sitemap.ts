@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { anthropicServers, officialServers, camelServers } from "@/public/servers";
 
+export const dynamic = 'force-static'
+
 // Merge all server data
 const serversWithSource = [
   ...anthropicServers.map(server => ({ ...server, source: 'anthropic' })),
@@ -53,19 +55,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Pages categorized by source
   routes.push(
     {
-      url: `${baseUrl}/servers/source/official`,
+      url: `${baseUrl}/?filter=official`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/servers/source/anthropic`,
+      url: `${baseUrl}/?filter=anthropic`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/servers/source/camel`,
+      url: `${baseUrl}/?filter=camel`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,

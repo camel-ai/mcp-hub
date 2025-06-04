@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next';
 
+export const dynamic = 'force-static'
+
 // Base site URL - use actual domain in production, localhost in development
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ||
                process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :

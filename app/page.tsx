@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { anthropicServers, officialServers, camelServers } from "@/public/servers";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { anthropicServers, officialServers, camelServers, communityServers } from "@/public/servers";
 import {
   Card,
   CardDescription,
@@ -21,7 +22,8 @@ import { Header } from "@/components/header";
 const serversWithSource = [
   ...anthropicServers.map(server => ({ ...server, source: 'anthropic' as const })),
   ...officialServers.map(server => ({ ...server, source: 'official' as const })),
-  ...camelServers.map(server => ({ ...server, source: 'camel' as const }))
+  ...camelServers.map(server => ({ ...server, source: 'camel' as const })),
+  ...communityServers.map(server => ({ ...server, source: 'community' as const }))
 ];
 
 const allServers = serversWithSource.sort((a, b) =>
@@ -38,7 +40,7 @@ interface Server {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   env?: Record<string, any>;
   homepage: string;
-  source?: 'anthropic' | 'official' | 'camel';
+  source?: 'anthropic' | 'official' | 'camel' | 'community';
 }
 
 interface ModalProps {
@@ -128,7 +130,7 @@ function Modal({ server, onClose }: ModalProps) {
           </div>
           <div className="flex justify-between items-center pb-6 border-t ">
               <Badge
-                variant={server.command === 'uvx' ? 'secondary' : server.command === 'npx' ? 'pink' : undefined}
+                variant={server.command === 'uvx' ? 'default' : server.command === 'npx' ? 'pink' : undefined}
               >
                 {server.command}
               </Badge>
@@ -166,10 +168,37 @@ function Modal({ server, onClose }: ModalProps) {
   );
 }
 
-export default function Home() {
+function HomeContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [selectedServer, setSelectedServer] = useState<Server | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filter, setFilter] = useState<'all' | 'official' | 'anthropic' | 'camel'>('all');
+  const [filter, setFilter] = useState<'all' | 'official' | 'anthropic' | 'camel' | 'community'>('all');
+
+  // Update filter based on URL search params
+  useEffect(() => {
+    const filterParam = searchParams.get('filter');
+    if (filterParam && ['official', 'anthropic', 'camel', 'community'].includes(filterParam)) {
+      setFilter(filterParam as 'official' | 'anthropic' | 'camel' | 'community');
+    } else {
+      setFilter('all');
+    }
+  }, [searchParams]);
+
+  const handleFilterChange = (newFilter: 'all' | 'official' | 'anthropic' | 'camel' | 'community') => {
+    setFilter(newFilter);
+    
+    // Update URL search params without navigation
+    const params = new URLSearchParams(searchParams);
+    if (newFilter === 'all') {
+      params.delete('filter');
+    } else {
+      params.set('filter', newFilter);
+    }
+    
+    const newUrl = params.toString() ? `/?${params.toString()}` : '/';
+    router.replace(newUrl, { scroll: false });
+  };
 
   const handleCardClick = (server: Server) => {
     setSelectedServer(server);
@@ -184,6 +213,7 @@ export default function Home() {
     if (filter === 'all') return true;
     return server.source === filter;
   });
+
   return (
     <div className="flex flex-col min-h-screen p-4 sm:p-6 md:p-8 font-[family-name:var(--font-main)]">
       <Nav/>
@@ -192,40 +222,47 @@ export default function Home() {
         <div className="flex justify-start mb-6">
           <div className="inline-flex bg-muted rounded-lg p-1">
             <button
-              onClick={() => setFilter('all')}
+              onClick={() => handleFilterChange('all')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'all' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
               <Grid2X2 className="w-4 h-4" />
               All
             </button>
             <button
-              onClick={() => setFilter('camel')}
+              onClick={() => handleFilterChange('camel')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'camel' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
               <Image src="/camel-icon.svg" alt="Camel" width={16} height={16} />
               CAMEL
             </button> 
             <button
-              onClick={() => setFilter('official')}
+              onClick={() => handleFilterChange('official')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'official' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
               <ShieldCheck className="w-4 h-4 text-[#4215cc]" />
               Official
             </button>
             <button
-              onClick={() => setFilter('anthropic')}
+              onClick={() => handleFilterChange('anthropic')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'anthropic' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
               <Image src="/anthropic.svg" alt="Anthropic" width={16} height={16} />
               Anthropic
+            </button>
+            <button
+              onClick={() => handleFilterChange('community')}
+              className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'community' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
+            >
+              <Image src="/community.svg" alt="Community" width={16} height={16} />
+              Community
             </button>
           </div>
         </div>
         <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
           {filteredServers.map((server) => (
             <Card
-              key={server.key}
-              className="w-full cursor-pointer hover:shadow-md transition-shadow"
+              key={`${server.source}-${server.key}`}
+              className="w-full shadow-card cursor-pointer hover:shadow-md transition-shadow"
               onClick={() => handleCardClick(server as Server)}
             >
               <CardHeader>
@@ -236,6 +273,14 @@ export default function Home() {
                     <Image
                       src="/camel-icon.svg"
                       alt="Camel"
+                      width={24}
+                      height={24}
+                      className="flex-shrink-0"
+                    />
+                  ) : server.source === 'community' ? (
+                    <Image
+                      src="/community.svg"
+                      alt="Community"
                       width={24}
                       height={24}
                       className="flex-shrink-0"
@@ -279,5 +324,13 @@ export default function Home() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
