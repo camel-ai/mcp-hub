@@ -20,7 +20,7 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2 space-y-4 gap-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2">
               <Image
-                src="/logo.svg"
+                src="https://camel-ai.github.io/camel_asset/logo/camel_logo.svg"
                 alt="CAMEL AI Logo"
                 width={0}
                 height={40}

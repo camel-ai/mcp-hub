@@ -105,7 +105,7 @@ function Modal({ server, onClose }: ModalProps) {
                   <ShieldCheck className="w-6 h-6 text-[#4215cc] flex-shrink-0" />
                 ) : server.source === 'camel' ? (
                   <Image
-                    src="/camel-icon.svg"
+                    src="https://camel-ai.github.io/camel_asset/mcp/camel-icon.svg"
                     alt="Camel"
                     width={24}
                     height={24}
@@ -113,7 +113,7 @@ function Modal({ server, onClose }: ModalProps) {
                   />
                 ) : (
                   <Image
-                    src="/anthropic.svg"
+                    src="https://camel-ai.github.io/camel_asset/mcp/anthropic.svg"
                     alt="Anthropic"
                     width={24}
                     height={24}
@@ -232,7 +232,7 @@ function HomeContent() {
               onClick={() => handleFilterChange('camel')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'camel' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
-              <Image src="/camel-icon.svg" alt="Camel" width={16} height={16} />
+              <Image src="https://camel-ai.github.io/camel_asset/mcp/camel-icon.svg" alt="Camel" width={16} height={16} />
               CAMEL
             </button> 
             <button
@@ -246,14 +246,14 @@ function HomeContent() {
               onClick={() => handleFilterChange('anthropic')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'anthropic' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
-              <Image src="/anthropic.svg" alt="Anthropic" width={16} height={16} />
+              <Image src="https://camel-ai.github.io/camel_asset/mcp/anthropic.svg" alt="Anthropic" width={16} height={16} />
               Anthropic
             </button>
             <button
               onClick={() => handleFilterChange('community')}
               className={`px-4 py-2 text-sm font-bold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${filter === 'community' ? 'bg-card shadow-sm' : 'hover:bg-background/50'}`}
             >
-              <Image src="/community.svg" alt="Community" width={16} height={16} />
+              <Image src="https://camel-ai.github.io/camel_asset/mcp/community.svg" alt="Community" width={16} height={16} />
               Community
             </button>
           </div>
@@ -271,7 +271,7 @@ function HomeContent() {
                     <ShieldCheck className="w-6 h-6 text-primary flex-shrink-0" />
                   ) : server.source === 'camel' ? (
                     <Image
-                      src="/camel-icon.svg"
+                      src="https://camel-ai.github.io/camel_asset/mcp/camel-icon.svg"
                       alt="Camel"
                       width={24}
                       height={24}
@@ -279,7 +279,7 @@ function HomeContent() {
                     />
                   ) : server.source === 'community' ? (
                     <Image
-                      src="/community.svg"
+                      src="https://camel-ai.github.io/camel_asset/mcp/community.svg"
                       alt="Community"
                       width={24}
                       height={24}
@@ -287,7 +287,7 @@ function HomeContent() {
                     />
                   ) : (
                     <Image
-                      src="/anthropic.svg"
+                      src="https://camel-ai.github.io/camel_asset/mcp/anthropic.svg"
                       alt="Anthropic"
                       width={24}
                       height={24}

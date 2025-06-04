@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,7 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mcp.camel-ai.org'),
   title: {
     default: "CAMEL-AI MCP Hub – Official MCP Servers & Integrations",
     template: "%s | CAMEL-AI MCP Hub"
@@ -29,19 +36,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' }
+      { url: 'https://camel-ai.github.io/camel_asset/mcp/favicon.ico', sizes: '32x32' },
+      { url: 'https://camel-ai.github.io/camel_asset/mcp/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: 'https://camel-ai.github.io/camel_asset/mcp/favicon-32x32.png', sizes: '32x32', type: 'image/png' }
     ],
     apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }
+      { url: 'https://camel-ai.github.io/camel_asset/mcp/apple-icon.png', sizes: '180x180', type: 'image/png' }
     ],
-    shortcut: '/favicon.ico'
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
+    shortcut: 'https://camel-ai.github.io/camel_asset/mcp/favicon.ico'
   },
   robots: {
     index: true,
@@ -62,7 +64,7 @@ export const metadata: Metadata = {
     creator: "@CamelAIOrg",
     images: [
       {
-        url: "/twitter-card.png",
+        url: "https://camel-ai.github.io/camel_asset/mcp/twitter-card.png",
         width: 1200,
         height: 628,
         alt: "CAMEL-AI MCP Hub - Official MCP Servers & Integrations"
