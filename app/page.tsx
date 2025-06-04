@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { anthropicServers, officialServers, camelServers, communityServers } from "@/public/servers";
 import {
   Card,
@@ -169,7 +169,6 @@ function Modal({ server, onClose }: ModalProps) {
 }
 
 function HomeContent() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedServer, setSelectedServer] = useState<Server | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -188,8 +187,8 @@ function HomeContent() {
   const handleFilterChange = (newFilter: 'all' | 'official' | 'anthropic' | 'camel' | 'community') => {
     setFilter(newFilter);
     
-    // Update URL search params without navigation
-    const params = new URLSearchParams(searchParams);
+    // Use browser History API directly
+    const params = new URLSearchParams(window.location.search);
     if (newFilter === 'all') {
       params.delete('filter');
     } else {
@@ -197,7 +196,9 @@ function HomeContent() {
     }
     
     const newUrl = params.toString() ? `/?${params.toString()}` : '/';
-    router.replace(newUrl, { scroll: false });
+    
+    // Use History API instead of Next.js router
+    window.history.replaceState({}, '', newUrl);
   };
 
   const handleCardClick = (server: Server) => {
