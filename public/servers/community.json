@@ -1,0 +1,14 @@
+[
+  {
+    "name": "CAMEL Toolkits",
+    "key": "camel-toolkits",
+    "description": "A lightweight server that exports CAMEL framework toolkits as MCP-compatible tools.",
+    "command": "uvx",
+    "args": ["camel-toolkits-mcp"],
+    "env": {
+      "OPENAI_API_KEY": "apiKey@string::Your-OpenAI-API-Key",
+      "NOTION_TOKEN": "token@string::Your-Notion-Token"
+    },
+    "homepage": "https://github.com/camel-ai/Camel-toolkits-mcp"
+  }
+]

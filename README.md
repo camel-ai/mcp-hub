@@ -1,122 +1,96 @@
-# MCP Hub - Model Context Protocol Server
+# CAMEL MCP Hub
+<div align="left">
 
-A comprehensive hub for MCP (Model Context Protocol) servers and integrations designed to supercharge AI agents and multi-agent workflows.
+[![Documentation][docs-image]][docs-url]
+[![Discord][discord-image]][discord-url]
+[![X][x-image]][x-url]
+[![Reddit][reddit-image]][reddit-url]
+[![Wechat][wechat-image]][wechat-url]
+[![Hugging Face][huggingface-image]][huggingface-url]
+[![Star][star-image]][star-url]
+[![Package License][package-license-image]][package-license-url]
+[![PyPI Download][package-download-image]][package-download-url]
 
-## Getting Started
+</div>
 
-### Prerequisites
 
-- Node.js 20.x or higher
-- npm or yarn
+## 🌐 Discover MCP Servers
 
-### Installation
+**CAMEL MCP Hub** is a community-driven directory for discovering **MCP (Model Context Protocol) servers**.  
+This platform is built to help developers find and use:
 
-1. Clone the repository:
+- [Official MCP servers](https://mcp.camel-ai.org/?filter=official)  
+- [CAMEL MCP servers](https://mcp.camel-ai.org/?filter=camel)  
+- [Anthropic MCP servers](https://mcp.camel-ai.org/?filter=anthropic)  
+- [Community MCP servers](https://mcp.camel-ai.org/?filter=community)
 
-```bash
-git clone https://github.com/camel-ai/mcp-hub.git
-cd mcp-hub
-```
+All listed servers are **verified** and curated to ensure a **secure and reliable environment** for building agent-based applications.
 
-2. Install dependencies:
 
-```bash
-npm install
-# or
-yarn install
-```
 
-3. Run the development server:
+## 📦 Contribution Guidelines
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+To contribute your MCP server to the CAMEL MCP Hub, please follow the guidelines below based on your category:
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🐫 CAMEL Tool Providers
+Add your server configuration to:
+[`/public/servers/camel.json`](./public/servers/camel.json)
 
-## Server Data Structure
+### 🛡 ️Official Providers
+Add your MCP server configurations to:
+[`/public/servers/official.json`](./public/servers/official.json)
 
-The core of this project is the server data stored in JSON files. The application uses two main JSON files to catalog MCP servers:
+### 📁 Anthropic Servers
+Add your Anthropic server configuration to:  
+[`/public/servers/anthropic.json`](./public/servers/anthropic.json)
 
-- `public/servers/anthropic.json`: Contains Anthropic MCP servers
-- `public/servers/official.json`: Contains official MCP servers
+### 👥 Community Developers
+Want to share your own server? Add your configuration to:
+[`/public/servers/community.json`](./public/servers/community.json)
 
-Each server entry follows this structure:
+---
+
+## 🧾 Configuration Schema
+
+Below is a sample server configuration schema:
 
 ```json
 {
-  "name": "Server Name",
-  "key": "server-key",
-  "description": "Description of the server functionality",
+  "name": "Filesystem",
+  "key": "filesystem",
+  "description": "Read, write, and manipulate local files through a controlled API.",
   "command": "npx",
-  "args": ["-y", "@package/server-name"],
-  "env": {
-    "API_KEY": "{{apiKey@string::Your API key}}"
-  },
-  "homepage": "https://github.com/org/repo"
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-filesystem",
+    "{{dirs@list::directories you about to access. Trailing slash in path required.}}"
+  ],
+  "homepage": "https://github.com/modelcontextprotocol/servers/tree/HEAD/src/filesystem"
 }
 ```
 
-## Adding New Servers
+<br>
 
-To add new servers to the catalog:
+[docs-image]: https://img.shields.io/badge/Documentation-EB3ECC
+[docs-url]: https://camel-ai.github.io/camel/index.html
+[star-image]: https://img.shields.io/github/stars/camel-ai/camel?label=stars&logo=github&color=brightgreen
+[star-url]: https://github.com/camel-ai/camel/stargazers
+[package-license-image]: https://img.shields.io/badge/License-Apache_2.0-blue.svg
+[package-license-url]: https://github.com/camel-ai/camel/blob/master/licenses/LICENSE
+[package-download-image]: https://img.shields.io/pypi/dm/camel-ai
 
-1. Add the server information to either `anthropic.json` or `official.json`
-2. Follow the existing structure for consistency
-3. The changes will be automatically reflected in the UI
-
-This collaborative approach allows the community to maintain an up-to-date catalog of MCP servers.
-
-## Deployment
-
-### Using Docker
-
-Build and run the Docker image:
-
-```bash
-# Build the image
-docker build -t mcp-hub:latest .
-
-# Run the container
-docker run -p 3000:3000 mcp-hub:latest
-```
-
-### Deploying to Vercel
-
-The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-```bash
-npm install -g vercel
-vercel
-```
-
-## Technologies
-
-- [Next.js](https://nextjs.org/) - React framework
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [shadcn/ui](https://ui.shadcn.com/) - UI component library
-- [Framer Motion](https://www.framer.com/motion/) - Animation library
-- [Lucide React](https://lucide.dev/) - Icon library
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgements
-
-- [Model Context Protocol](https://github.com/modelcontextprotocol) - For creating the MCP standard
-- [Anthropic](https://www.anthropic.com/) - For their contributions to the MCP ecosystem
-- [CAMEL-AI](https://camel-ai.org/) - For hosting and maintaining the MCP Hub
+[colab-url]: https://colab.research.google.com/drive/1AzP33O8rnMW__7ocWJhVBXjKziJXPtim?usp=sharing
+[colab-image]: https://colab.research.google.com/assets/colab-badge.svg
+[huggingface-url]: https://huggingface.co/camel-ai
+[huggingface-image]: https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-CAMEL--AI-ffc107?color=ffc107&logoColor=white
+[discord-url]: https://discord.camel-ai.org/
+[discord-image]: https://img.shields.io/discord/1082486657678311454?logo=discord&labelColor=%20%235462eb&logoColor=%20%23f5f5f5&color=%20%235462eb
+[wechat-url]: https://ghli.org/camel/wechat.png
+[wechat-image]: https://img.shields.io/badge/WeChat-CamelAIOrg-brightgreen?logo=wechat&logoColor=white
+[x-url]: https://x.com/CamelAIOrg
+[x-image]: https://img.shields.io/twitter/follow/CamelAIOrg?style=social
+[twitter-image]: https://img.shields.io/twitter/follow/CamelAIOrg?style=social&color=brightgreen&logo=twitter
+[reddit-url]: https://www.reddit.com/r/CamelAI/
+[reddit-image]: https://img.shields.io/reddit/subreddit-subscribers/CamelAI?style=plastic&logo=reddit&label=r%2FCAMEL&labelColor=white
+[ambassador-url]: https://www.camel-ai.org/community
+[package-download-url]: https://pypi.org/project/camel-ai
