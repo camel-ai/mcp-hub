@@ -24,7 +24,7 @@
 
 ### 🏢 官方提供方
 添加 MCP 服务器配置至：  
-[`/public/servers/officials.json`](./public/servers/officials.json)
+[`/public/servers/official.json`](./public/servers/official.json)
 
 ### 📁 Anthropic 服务器
 添加 Anthropic 服务器配置至：  

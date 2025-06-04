@@ -38,7 +38,7 @@ To add new servers to the catalog:
 
 This collaborative approach allows the community to maintain an up-to-date catalog of MCP servers.
 
-## Quicck Start
+## Quick Start
 
 ### Prerequisites
 
