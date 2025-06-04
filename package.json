@@ -20,7 +20,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.0",

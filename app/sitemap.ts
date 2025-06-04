@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { anthropicServers, officialServers, camelServers } from "@/public/servers";
+import { anthropicServers, officialServers, camelServers, communityServers } from "@/public/servers";
 
 export const dynamic = 'force-static'
 
@@ -7,7 +7,8 @@ export const dynamic = 'force-static'
 const serversWithSource = [
   ...anthropicServers.map(server => ({ ...server, source: 'anthropic' })),
   ...officialServers.map(server => ({ ...server, source: 'official' })),
-  ...camelServers.map(server => ({ ...server, source: 'camel' }))
+  ...camelServers.map(server => ({ ...server, source: 'camel' })),
+  ...communityServers.map(server => ({ ...server, source: 'community' }))
 ];
 
 // Sort by name

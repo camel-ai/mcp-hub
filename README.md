@@ -38,11 +38,11 @@ Add your server configuration to:
 
 ### 🛡 ️Official Providers
 Add your MCP server configurations to:
-[`/public/servers/officials.json`](./public/servers/officials.json)
+[`/public/servers/official.json`](./public/servers/official.json)
 
-### 📁 Antropic Servers
+### 📁 Anthropic Servers
 Add your Anthropic server configuration to:  
-[`/public/servers/category.json`](./public/servers/anthropic.json)
+[`/public/servers/anthropic.json`](./public/servers/anthropic.json)
 
 ### 👥 Community Developers
 Want to share your own server? Add your configuration to:
