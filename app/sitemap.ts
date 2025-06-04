@@ -72,6 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/?filter=community`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     }
   );
 

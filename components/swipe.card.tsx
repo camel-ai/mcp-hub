@@ -13,21 +13,21 @@ interface BlogCardData {
 const blogCards: BlogCardData[] = [
   {
     id: 1,
-    src: "/camel-ai-agent-mcp-integration.png",
+    src: "https://camel-ai.github.io/camel_asset/mcp/camel-ai-agent-mcp-integration.png",
     title: "How to Connect Your CAMEL-AI Agent to External Tools via MCP",
     description: "Seamlessly integrate databases, APIs, and web services into your CAMEL-AI agents using the Model Context Protocol.",
     link: "https://www.camel-ai.org/blogs/camel-ai-agent-mcp-integration",
   },
   {
     id: 2,
-    src: "/connect-your-owl-agent-to-notion-via-the-mcp-server.png",
+    src: "https://camel-ai.github.io/camel_asset/mcp/connect-your-owl-agent-to-notion-via-the-mcp-server.png",
     title: "How to Connect Your OWL Agent to Notion via the MCP Server",
     description: "Empower your CAMEL-AI OWL agent to interact with Notion using the MCP server.",
     link: "https://www.camel-ai.org/blogs/connect-your-owl-agent-to-notion-via-the-mcp-server",
   },
   {
     id: 3,
-    src: "/camel-mcp-servers-model-context-protocol-ai-agents.png",
+    src: "https://camel-ai.github.io/camel_asset/mcp/camel-mcp-servers-model-context-protocol-ai-agents.png",
     title: "CAMEL x MCP: Making AI Agents Accessible to All Tools",
     description: "A lightweight server that exports Camel framework toolkits as MCP-compatible tools.",
     link: "https://www.camel-ai.org/blogs/camel-mcp-servers-model-context-protocol-ai-agents",

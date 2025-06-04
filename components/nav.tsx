@@ -23,7 +23,7 @@ export function Nav() {
     <nav className="fixed top-0 left-0 right-0 h-18 z-50 flex justify-between items-center px-8 py-4 bg-background/80 backdrop-blur-sm">
       <a href="https://github.com/camel-ai/camel" target="_blank" rel="noopener noreferrer">
         <Image
-          src="/logo.svg"
+          src="https://camel-ai.github.io/camel_asset/logo/camel_logo.svg"
           alt="CAMEL AI Logo"
           width={140}
           height={36}
@@ -33,7 +33,7 @@ export function Nav() {
       <div className="flex flex-row items-center gap-6">
         <Button 
           variant="link" 
-          className="hidden md:flex flex-row items-center gap-2 font-bold text-primary"
+          className="hidden md:hidden flex-row items-center gap-2 font-bold text-primary"
           onClick={() => window.open('https://github.com/camel-ai/camel', '_blank')}
         >
           CAMEL GitHub 🌟: {stars.toLocaleString()}
