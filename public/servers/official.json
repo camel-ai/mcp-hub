@@ -167,6 +167,18 @@
     "homepage": "https://github.com/kagisearch/kagimcp"
   },
   {
+    "name": "Keboola",
+    "key": "keboola",
+    "description": "Connect AI agents to Keboola data platform. Query tables, create SQL transformations, run jobs, and manage project documentation with natural language.",
+    "command": "uvx",
+    "args": ["keboola_mcp_server", "--api-url", "{{apiUrl@string::Your Keboola API URL (e.g., https://connection.keboola.com)}}"],
+    "env": {
+      "KBC_STORAGE_TOKEN": "{{storageToken@string::Your Keboola Storage API token}}",
+      "KBC_WORKSPACE_SCHEMA": "{{workspaceSchema@string::Your Keboola workspace schema/dataset name}}"
+    },
+    "homepage": "https://github.com/keboola/mcp-server"
+  },
+  {
     "name": "Linkup Search",
     "key": "linkup-search",
     "description": "Integrates with Linkup Technologies' API to enable web searches for information gathering, fact-checking, and research tasks.",
