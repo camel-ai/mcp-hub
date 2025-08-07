@@ -2,9 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  basePath: '/mcp',
   output: 'export',
+  trailingSlash: true,
   reactStrictMode: true,
+  images: {
+    unoptimized: true
+  }
 };
 
 export default nextConfig;
