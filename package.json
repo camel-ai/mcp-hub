@@ -20,7 +20,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d out"
+    "export": "next build",
+    "deploy": "npm run build && gh-pages -d out"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.0",
@@ -43,6 +44,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "gh-pages": "^6.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
