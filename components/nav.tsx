@@ -38,6 +38,12 @@ export function Nav() {
         >
           CAMEL GitHub 🌟: {stars.toLocaleString()}
         </Button>
+        <Button 
+          className="bg-primary text-primary-foreground font-bold px-4 py-1 rounded-lg"
+          onClick={() => window.open('https://mcp.camel-ai.org/course', '_blank')}
+        >
+          CAMEL MCP Course
+        </Button>
         <Button
           className="bg-primary text-primary-foreground font-bold px-4 py-1 rounded-lg"
           onClick={() => window.open('https://github.com/camel-ai/mcp-hub', '_blank')}

@@ -1,0 +1,57 @@
+# Module 4: Building Your Own MCP Server
+
+**Objective:** Learn how to create your own MCP server using FastMCP to share tools with AI agents.
+
+## 4.1 Introduction to FastMCP
+
+`FastMCP` is a Python framework that makes building MCP servers a breeze. Think of it as a helpful assistant that takes care of the tricky protocol details, so you can focus on creating cool tools for your AI agents. `FastMCP` sets up the server to share these with any MCP-compatible client, like a CAMEL AI agent.
+
+FastMCP is great because it’s lightweight and flexible, letting you define exactly what your server does without wrestling with complex networking code. It’s like setting up a lemonade stand—you decide what’s on the menu, and FastMCP handles the customers.
+
+## 4.2 Creating an MCP Server
+
+To build an MCP server, you use FastMCP’s decorators to turn regular Python functions into tools, resources, or prompts that AI agents can discover and use. It’s as simple as writing a function, adding a decorator, and letting FastMCP do the rest.
+
+Here’s a step-by-step look:
+
+1. **Set Up the Server:** Create a FastMCP server instance with a name.
+2. **Define Functions:** Write Python functions for your tools or resources.
+3. **Add Decorators:** Use FastMCP decorators to make them MCP-ready.
+
+**Code Example:**
+
+```python
+from mcp.server.fastmcp import FastMCP
+
+# Create a server named "DemoServer"
+mcp = FastMCP("DemoServer")
+
+# Define a tool for adding numbers
+@mcp.tool()
+def add(a: int, b: int) -> int:
+    """Add two numbers."""
+    return a + b
+
+# Define a resource for personalized greetings
+@mcp.resource("greeting://{name}")
+def get_greeting(name: str) -> str:
+    """Get a personalized greeting."""
+    return f"Hello, {name}!"
+
+```
+
+## 4.3 How Decorators Work
+
+Decorators are like labels that tell FastMCP how to use your functions. Here’s what they do:
+
+- `@mcp.tool():` Makes a function a tool for actions like calculations, using docstrings and type hints to define it.
+- `@mcp.resource():` Sets up a data source, like a message, accessible via a URI (e.g., greeting://{name}).
+- `@mcp.prompt():` Creates a template to guide AI responses, such as for questions or summaries.
+
+**Why Different?**
+
+Unlike traditional toolkits, MCP servers decouple tool logic from the agent, enabling standardized, discoverable access.
+
+**Reflection Question:**
+
+What custom tool would you build with FastMCP?

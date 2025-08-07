@@ -1,0 +1,114 @@
+## Module 6: Advanced MCP Concepts
+
+**Objective:** Explore server discovery and future MCP trends.
+
+### 6.1 Discovering MCP Servers
+
+`PulseMCPSearchToolkit` lets you hunt down MCP servers dynamically—no more manual digging.
+
+**Code Example:**
+
+```python
+from camel.toolkits.mcp import PulseMCPSearchToolkit
+
+search_toolkit = PulseMCPSearchToolkit()
+results = search_toolkit.search_mcp_servers(query="Slack", top_k=1)
+print(results)
+
+```
+
+### 6.2 ChatAgent as MCP
+
+Export your CAMEL `ChatAgent` as an MCP server so other clients (e.g., Claude, Cursor) can call it. Two ways to do it:
+
+1. Via the scripts in `services/`, just provide the config file to your favorite MCP clients, e.g., Claude, Cursor, etc
+    
+    ```python
+    "camel-chat-agent": {
+      "command": "/path/to/python",
+      "args": [
+        "/path/to/camel/services/agent_mcp_server.py"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "...",
+        "OPENROUTER_API_KEY": "...",
+        "BRAVE_API_KEY": "..."
+      }
+    }
+    ```
+    
+    Attached screenshots shows Claude calls the CAMEL MCP servers.
+    
+    ![chatagent-as-mcp.png](mcp.camel-ai.org/course/module6/chatagent-as-mcp.png)
+    
+    ![chatagent-as-mcp2.png](mcp.camel-ai.org/course/module6/chatagent-as-mcp2.png)
+    
+2. Using the `to_mcp()` function, as simple as the following script, it turns your agent into a MCP server.
+    
+    ```python
+    from camel.agents import ChatAgent
+    
+    # Create a chat agent with a model
+    agent = ChatAgent(model="gpt-4o-mini")
+    
+    # Create an MCP server from the agent
+    mcp_server = agent.to_mcp(
+        name="demo", description="A demonstration of ChatAgent to MCP conversion"
+    )
+    
+    # Run the server
+    if __name__ == "__main__":
+        print("Starting MCP server on http://localhost:8000")
+        mcp_server.run(transport="streamable-http")
+    
+    ```
+    
+
+### 6.3 MCP agent!
+
+1. MCP agent using MCP registry
+    
+    https://github.com/camel-ai/camel/blob/master/examples/agents/mcp_agent/mcp_agent_using_registry.py
+    
+    Connect your MCP agent to popular MCP registries, such as ACI.dev, and 
+    
+    ```python
+        aci_config = ACIRegistryConfig(
+            api_key=os.getenv("ACI_API_KEY"),
+            linked_account_owner_id=os.getenv("ACI_LINKED_ACCOUNT_OWNER_ID"),
+        )
+        
+    		model = ModelFactory.create(
+            model_platform=ModelPlatformType.OPENAI,
+            model_type=ModelType.GPT_4O,
+        )
+    
+        # Create MCPAgent with registry configurations
+        agent = MCPAgent(
+            model=model,
+            registry_configs=[aci_config],
+        )
+    
+    ```
+    
+    Now your agent is connected to the [ACI.dev](http://ACI.dev) ecosystem, and be able to use all the servers from there.
+    
+2. MCP agent without function calling ability
+
+https://github.com/camel-ai/camel/blob/master/examples/agents/mcp_agent/mcp_agent_without_function_calling.py
+
+### 6.4 CAMEL MCP hub
+
+check https://mcp.camel-ai.org/
+
+### 6.5 Workforce as MCP (ongoing)
+
+Expose CAMEL AI multi-agent systems as MCP servers for complex tasks (in development).
+
+**Example:**
+
+A “FinancialAnalysisWorkforce” MCP server could analyze reports using multiple agents, returning results via MCP.
+
+**Reflection Question:**
+
+How could MCP enhance multi-agent systems?

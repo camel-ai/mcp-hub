@@ -1,0 +1,98 @@
+# Module 1: Understanding Tooling in CAMEL AI
+
+**Objective:** Learn what tools are in CAMEL AI, how to configure and use them, and why traditional tooling has limitations.
+
+## 1.1 Introduction to Tools in CAMEL AI
+
+Tools in CAMEL AI are like superpowers for AI agents, extending their abilities beyond simple text generation. Just as humans use hammers or calculators, AI agents use tools to interact with the world—fetching data, performing calculations, or executing tasks.
+
+In CAMEL AI, tools are typically Python functions that you define and wrap with `FunctionTool`. These tools are then handed to a `ChatAgent`, which decides when to use them based on user queries.
+
+**Example:**
+
+Imagine an AI agent that can add numbers. You’d give it an `add` tool to handle the math.
+
+```python
+# Define a tool
+def add(a: int, b: int) -> int:
+    """Add two integers."""
+    return a + b
+
+# Wrap it
+add_tool = FunctionTool(add)
+
+# Create a model
+model = ModelFactory.create(
+    model_platform=ModelPlatformType.OPENAI,
+    model_type=ModelType.GPT_3_5_TURBO,
+    model_config_dict={"temperature": 0.0}
+)
+
+# Initialize the agent
+system_message = BaseMessage.make_system_message(
+    role_name="MathAssistant",
+    content="You help with math using tools."
+)
+agent = ChatAgent(model=model, tools=[add_tool])
+
+# Use the agent
+response = agent.step("What is 5 plus 3?")
+print(response.msgs[0].content)  # Output: "8"
+
+```
+
+Tools are nothing but pre built python functions that add additional functionality to your LLMs to make them usable in real world ie agents.
+
+Internally they just trigger actions for us when we give a certain indicator to the agents
+
+## 1.2 Using Toolkits
+
+CAMEL AI provides pre-built toolkits, like ArxivToolkit, that simplify complex API calls and tool configurations. With just a few lines of code, you can plug these tool collections into your agent to perform tasks such as searching academic papers.
+
+**Code Example:**
+
+```python
+from camel.toolkits import ArxivToolkit
+
+# Initialize the toolkit
+toolkit = ArxivToolkit()
+
+# Create an agent with the toolkit
+agent = ChatAgent(model=model, tools=toolkit.get_tools())
+response = agent.step("Find papers on AI ethics.")
+print(response.msgs[0].content)  # Outputs paper summaries
+
+```
+
+## 1.3 Limitations of Traditional Tooling
+
+While powerful, traditional tooling in CAMEL AI has drawbacks:
+
+- **Incompatible Provider-Specific Schemas:** Each AI provider (e.g., OpenAI, Gemini) uses a unique format for defining tools. A `search_web` tool built for OpenAI won't work with Gemini without significant reformatting due to their differing schema requirements.
+- **Extensive Custom Adapters and Rewriting:** Because of these disparate schemas, developers must write custom adapters or completely rewrite tools for each provider. A `send_email` tool, for instance, would need a separate version tailored for OpenAI, another for Gemini, and so on, leading to high maintenance overhead.
+- **Limited Interoperability and Framework Silos:** Tools and workflows developed within one AI framework (e.g., LangChain) are often incompatible with others (e.g., CAMEL AI). This creates functional silos, preventing seamless integration and component reuse across different multi-agent systems or development platforms.
+
+**Conceptual Schema Mismatch:**
+
+```json
+{
+  "openai_tool": {
+    "function": {
+      "name": "get_weather",
+      "parameters": {"location": "string"}
+    }
+  },
+  "gemini_tool": {
+    "function_declarations": [
+      {"name": "get_weather", "args": {"location": "str"}}
+    ]
+  }
+}
+
+```
+
+These limitations call for a better solution—MCP.
+
+**Reflection Question:**
+
+What tool would you create for an AI agent, and how would you define it?
