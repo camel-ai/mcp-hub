@@ -1,0 +1,73 @@
+# Module 3: Understanding MCP’s Architecture
+
+**Objective:** Get familiar with how MCP’s client-server design works and follow the steps of its interaction flow.
+
+## 3.1 What is MCP’s Client-Server Architecture?
+
+MCP’s architecture is like a well-organized team where each member has a specific role, working together to get things done. It splits tasks between a few key players, making it easy for AI agents to use tools from different sources. Let’s meet the team:
+
+- **Host:** This is the main AI application, like your CAMEL AI setup, where all the action starts. Think of it as the brain that decides what needs to be done.
+- **MCP Client:** The client is the go-between, connecting the host to external tools. It sends requests to servers and brings back the results, like a messenger.( eg Claude Desktop, Cursor, CAMEL-AI Agent )
+- **MCP Server:** These are the tool providers, offering specific functions, data, or prompts. For example, one server might handle Notion tasks, while another searches Arxiv papers.( eg ACI.dev, Composio etc )
+
+This setup keeps things flexible, letting your AI app talk to multiple servers at once, each offering unique tools.
+
+**Diagram:**
+
+```mermaid
+graph LR
+    subgraph Computer [" Your Computer "]
+        Host["Host with MCP Client<br/>(CAMEL Agent, Claude , IDE's)"]
+
+        ServerA["Notion<br/>MCP Server"]
+        ServerB["File System<br/>MCP Server"]
+        ServerC["ArXiv<br/>MCP Server"]
+
+        DataA[("Local<br/>Notion Cache")]
+        DataB[("Local<br/>Files")]
+    end
+
+    subgraph Internet [" Internet "]
+        RemoteService[("ArXiv<br/>Database")]
+    end
+
+    %% MCP Protocol connections
+    Host -.->|MCP Protocol| ServerA
+    Host -.->|MCP Protocol| ServerB
+    Host -.->|MCP Protocol| ServerC
+
+    %% Data connections
+    ServerA <--> DataA
+    ServerB <--> DataB
+    ServerC -.->|Web APIs| RemoteService
+
+    %% Styling
+    style Host fill:#4a90e2,color:#fff,stroke:#2c5aa0,stroke-width:2px
+    style ServerA fill:#333,color:#fff,stroke:#666,stroke-width:2px
+    style ServerB fill:#333,color:#fff,stroke:#666,stroke-width:2px
+    style ServerC fill:#333,color:#fff,stroke:#666,stroke-width:2px
+    style DataA fill:#666,color:#fff,stroke:#999,stroke-width:2px
+    style DataB fill:#666,color:#fff,stroke:#999,stroke-width:2px
+    style RemoteService fill:#666,color:#fff,stroke:#999,stroke-width:2px
+    style Computer fill:#f0f0f0,stroke:#999,stroke-width:2px
+    style Internet fill:#e6f3ff,stroke:#4a90e2,stroke-width:2px
+
+    ![what-is-mcp-client-server-architecture.png](mcp.camel-ai.org/course/module3/what-is-mcp-client-server-architecture.png)
+
+```
+
+## 3.2 Interaction Flow
+
+1. **Connect:** Client links to a server.
+2. **Discover:** Client lists available tools.
+3. **Choose:** Agent picks a tool.
+4. **Invoke:** Client requests tool execution.
+5. **Return:** Server sends the result.
+
+**Example:**
+
+A CAMEL agent asks, “What time is it?” It connects to a Time MCP Server, discovers `get_current_time`, invokes it, and gets the time.
+
+**Reflection Question:**
+
+Why is dynamic tool discovery useful?

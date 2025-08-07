@@ -1,0 +1,264 @@
+# Module 5: Integrating CAMEL AI with MCP
+
+**Objective:** Configure CAMEL AI agents as MCP clients to use tools from MCP servers.
+
+## 5.1 CAMEL AI as an MCP Client
+
+Turning your CAMEL AI agent into an MCP client is like giving it a magic key to unlock tools from infinite MCP servers. The `MCPToolkit` makes this super easy by connecting your agent to servers, fetching their tools, and letting your agent use them without fuss.
+
+You’ll set up a config file, connect to servers, and plug the tools into your agent. Plus, you can use tools like **ACI.dev**, **Composio**, or **npx** to download and configure MCP servers, making the process even smoother. Here’s how it all comes together.
+
+### Steps to Set Up
+
+1. **Define a Config File:** Create a JSON file to tell `MCPToolkit` which MCP servers to connect to and how to access them.
+2. **Initialize and Connect `MCPToolkit`:** Load the config and establish connections to the servers.
+3. **Pass Tools to `ChatAgent`:** Hand the server’s tools to your CAMEL AI agent for seamless use.
+
+```mermaid
+graph TB
+    subgraph CAMEL [" CAMEL AI Application "]
+        Agent["ChatAgent<br/>(CAMEL AI)"]
+        Toolkit["MCPToolkit<br/>(CAMEL)"]
+        Config["Config File<br/>(JSON)"]
+    end
+
+    subgraph Local [" Local MCP Servers "]
+        TimeServer["Time Server<br/>(Python Script)"]
+        FileServer["File System<br/>Server"]
+    end
+
+    subgraph Remote [" Remote MCP Servers "]
+        ACI["ACI.dev<br/>(600+ Tools)"]
+        Composio["Composio<br/>(250+ Apps)"]
+        NPX["NPX Servers<br/>(Community)"]
+    end
+
+    subgraph Services [" External Services "]
+        Notion[("Notion<br/>Workspace")]
+        Gmail[("Gmail<br/>API")]
+        GitHub[("GitHub<br/>API")]
+        ArXiv[("ArXiv<br/>Database")]
+    end
+
+    %% Configuration and Connection Flow
+    Config -.->|Configuration| Toolkit
+    Toolkit -.->|Load Tools| Agent
+
+    %% MCP Protocol Connections
+    Toolkit -.->|MCP Protocol stdio| TimeServer
+    Toolkit -.->|MCP Protocol stdio| FileServer
+    Toolkit -.->|MCP Protocol SSE| ACI
+    Toolkit -.->|MCP Protocol SSE| Composio
+    Toolkit -.->|MCP Protocol npx| NPX
+
+    %% External Service Connections
+    ACI <--> Gmail
+    ACI <--> GitHub
+    Composio <--> Notion
+    NPX <--> ArXiv
+
+    %% User Interaction
+    User["User Query:<br/>What time is it?<br/>Create GitHub issue"]
+    User --> Agent
+    Agent -.->|Uses Tools| Toolkit
+
+    %% Styling
+    style Agent fill:#4a90e2,color:#fff,stroke:#2c5aa0,stroke-width:2px
+    style Toolkit fill:#ff6b35,color:#fff,stroke:#d4501f,stroke-width:2px
+    style Config fill:#f7dc6f,color:#333,stroke:#f4d03f,stroke-width:2px
+
+    style TimeServer fill:#333,color:#fff,stroke:#666,stroke-width:2px
+    style FileServer fill:#333,color:#fff,stroke:#666,stroke-width:2px
+
+    style ACI fill:#28a745,color:#fff,stroke:#1e7e34,stroke-width:2px
+    style Composio fill:#17a2b8,color:#fff,stroke:#117a8b,stroke-width:2px
+    style NPX fill:#6f42c1,color:#fff,stroke:#59359a,stroke-width:2px
+
+    style Notion fill:#666,color:#fff,stroke:#999,stroke-width:2px
+    style Gmail fill:#666,color:#fff,stroke:#999,stroke-width:2px
+    style GitHub fill:#666,color:#fff,stroke:#999,stroke-width:2px
+    style ArXiv fill:#666,color:#fff,stroke:#999,stroke-width:2px
+
+    style User fill:#e74c3c,color:#fff,stroke:#c0392b,stroke-width:2px
+
+    style CAMEL fill:#e8f4fd,stroke:#4a90e2,stroke-width:2px
+    style Local fill:#f0f0f0,stroke:#666,stroke-width:2px
+    style Remote fill:#e8f5e8,stroke:#28a745,stroke-width:2px
+    style Services fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+
+    ![camel-ai-as-an-mcp-client.png](mcp.camel-ai.org/course/module5/camel-ai-as-an-mcp-client.png)
+
+```
+
+### Why Config Files?
+
+Config files are like a treasure map for `MCPToolkit`. They list the MCP servers you want to use, including details like how to start a local server (e.g., running a Python script) or connect to a remote one (e.g., via a URL). This keeps your code tidy—you don’t need to hard-code server details, and you can easily add, remove, or update servers by editing the JSON. It’s a neat way to manage multiple servers without rewriting your program.
+
+### Understanding Transport Methods: stdio, sse, and streamable-http
+
+The transport method in your config file decides *how* your MCPToolkit talks to an MCP server. It’s like choosing whether to send a message by hand (local), over the internet (remote), or with a shiny new gadget (streamable-http). MCP supports three main transport methods:
+
+- **stdio (Standard Input/Output):** Used for local servers running on your computer. The client communicates with the server through standard input and output streams, like a direct phone line. It’s great for testing or custom servers (e.g., a Python script you wrote). For example, launching time_server.py locally uses stdio for fast, secure communication without network setup.
+- **sse (Server-Sent Events):** Used for remote servers hosted on the web. The client connects over HTTP, receiving updates via a stream of events, like a live chat. It’s ideal for managed servers from Composio or ACI.dev, where the server runs on a cloud platform. SSE requires a URL and handles network security, like TLS encryption.
+- **streamable-http:** The latest option for remote servers, offering a smoother and faster connection. Think of it as upgrading from a clunky old modem to a high-speed router. It uses HTTP with efficient event streaming, making it a step up from sse with better performance and easier setup. Perfect for cloud-hosted servers, it’s designed to be the go-to choice for a snappy, hassle-free experience.
+
+### Downloading and Configuring MCP Servers
+
+Before connecting, you need MCP servers to work with. You can build your own (as shown in Module 4) or download existing ones using tools like **ACI.dev**, **Composio**, or **npx**. Here’s how each helps:
+
+- **ACI.dev:** ACI.dev offers a unified MCP server approach that connects to over 600 tools, like Gmail or Brave Search, through a single interface. It’s like a Swiss Army knife for AI agents, letting you access multiple apps without juggling separate servers. To use it:
+    1. Sign up at `platform.aci.dev` and get an API key and account ID.
+    2. Install the `uv` package manager with `pip install uv`.
+    3. Configure the server in your JSON file (see below). ACI.dev handles authentication (e.g., OAuth) automatically, so you can focus on tasks like searching or automation.
+- **Composio:** Composio provides pre-built MCP servers for 250+ apps, such as Notion, Slack, or GitHub, with built-in authentication support (OAuth, API keys, etc.). It’s perfect for quickly adding tools to your workflow. To get started:
+    1. Install the Composio CLI with `npm install -g composio-core@rc`.
+    2. Sign in at `composio.dev` to get an API key.
+    3. Browse `mcp.composio.dev` for servers (e.g., Notion) and copy their SSE URL, like `https://mcp.composio.dev/notion/your-server-id`.
+    4. Add the server to your config file using `npx` to run it. Composio’s managed servers save you from building custom integrations.
+- **npx:** This Node.js tool lets you run MCP servers without permanent installation, ideal for testing or community tools. For example, run a memory server for Claude with:
+    
+    ```bash
+    npx -y @modelcontextprotocol/server-memory
+    ```
+    
+    Configure it in your JSON file (see below). Find servers at `github.com/modelcontextprotocol/servers` or `mcpserverfinder.com`, like GitHub or Google Calendar servers, and launch them via `npx`.
+    
+
+### Where to Find MCP Servers
+
+- **Build Your Own:** Use FastMCP to create custom servers (Module 4) with Python scripts like `time_server.py`.
+- **Download from Hubs:** Check `mcp.camel-ai.org` or `mcp.composio.dev` for official and community servers. Composio offers Notion or Linear servers, while ACI.dev lists apps at `platform.aci.dev/apps`.
+- **Package Managers:** Use `npm` (e.g., `npm install -g @modelcontextprotocol/server-filesystem`) or `pip` (e.g., `pip install mcp-server`) for Python-based servers.
+- **Community Repos:** Explore `github.com/modelcontextprotocol/servers` or `mcpserverfinder.com` for servers like Semantic Scholar or Blender MCP. Use community servers cautiously, as they may be untested.
+
+### Example Config Files
+
+Here are config file examples for different servers, highlighting transport methods:
+
+**Local Time Server (Python Script, `stdio`):**
+
+```json
+{
+  "mcpServers": {
+    "time_server": {
+      "command": "python",
+      "args": ["time_server.py"],
+      "transport": "stdio"
+    }
+  }
+}
+
+```
+
+**Composio Notion Server (npx,** `streamable-http`**):**
+
+```json
+{
+  "mcpServers": {
+    "composio-notion": {
+      "command": "npx",
+      "args": ["composio-core@rc", "mcp", "<https://mcp.composio.dev/notion/your-server-id>", "--client", "camel"],
+      "env": {
+        "COMPOSIO_API_KEY": "your-api-key-here"
+      },
+      "transport": "streamable-http"
+    }
+  }
+}
+
+```
+
+**ACI.dev Unified Server (`sse`):**
+
+```json
+{
+  "mcpServers": {
+    "aci_apps": {
+      "command": "uvx",
+      "args": [
+        "aci-mcp",
+        "apps-server",
+        "--apps=BRAVE_SEARCH,GITHUB,ARXIV",
+        "--linked-account-owner-id",
+        "<your_linked_acc_owner_id>"
+      ],
+      "env": {
+        "ACI_API_KEY": "your_aci_api_key"
+      }
+    }
+  }
+}
+
+```
+
+Save these as `config/time.json` or similar, adjusting paths and IDs as needed.
+
+**Code Example (Using the Time Server):**
+
+```python
+import asyncio
+from camel.toolkits.mcp_toolkit import MCPToolkit
+from camel.agents import ChatAgent
+
+async def main():
+    # Load the config file
+    mcp_toolkit = MCPToolkit(config_path="config/time.json")
+    # Connect to the server (using stdio for local time server)
+    await mcp_toolkit.connect()
+    # Create an agent with server tools
+    agent = ChatAgent(model=model, tools=mcp_toolkit.get_tools())
+    # Ask a question
+    response = await agent.astep("What time is it now?")
+    print(response.msgs[0].content)  # Outputs: "The current time is 03:52 PM IST"
+    # Disconnect when done
+    await mcp_toolkit.disconnect()
+
+asyncio.run(main())
+
+```
+
+### Working with MCP Servers
+
+After connecting, `MCPToolkit` queries the server for available tools (e.g., `get_current_time`). These tools are passed to your `ChatAgent`, which uses them based on queries. For example, asking “What time is it now?” triggers the `get_current_time` tool via `stdio`, and the server returns “03:52 PM IST”. With ACI.dev or Composio, you can access tools like fetching Notion pages or creating GitHub issues using `sse`, all through the same process. The server handles the heavy lifting, and `MCPToolkit` makes it plug-and-play.
+
+**Tips for Success:**
+
+- **Choose the Right Transport:** Use `stdio` for local testing (faster, no network needed) and `sse` for remote servers (cloud-based, scalable).
+- **Test Locally First:** Start with `stdio` servers to avoid network issues, then try `sse` for remote servers like Composio’s.
+- **Check Logs:** If a server fails, check logs (e.g., `~/Library/Logs/Claude/mcp-server.log`) or use the MCP Inspector (`npx @modelcontextprotocol/inspector`).
+- **Secure APIs:** Store API keys for ACI.dev or Composio in the `env` field, not hard-coded.
+
+**Try It Out:**
+
+Write a config file for a ACI app server using `npx` and `sse` transport. What tools might it offer?
+
+**Reflection Question:**
+
+How does using a config file with transport methods like `stdio` or `sse` make managing MCP servers easier than coding them directly?
+
+### 5.2 Toolkit as an MCP Server
+
+Turn CAMEL toolkits into MCP servers to share tools with other clients—like flipping from tool user to tool provider.
+
+**Code Example:**
+
+```python
+from camel.toolkits import ArxivToolkit
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--mode", default="stdio")
+args = parser.parse_args()
+
+toolkit = ArxivToolkit()
+toolkit.mcp.run(args.mode)
+
+```
+
+**How It Works:**
+
+The `mcp.run()` method (with an assumed `@MCPServer()` decorator in `ArxivToolkit`) exposes toolkit methods as MCP tools, listed via `tools/list`. Other MCP clients can then tap in.
+
+**Reflection Question:**
+
+Why bother with config files for MCP servers?
