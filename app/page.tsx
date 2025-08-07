@@ -13,8 +13,6 @@ import {
 } from "@/components/card";
 import { Badge } from "@/components/badge";
 import { Button } from "@/components/button";
-import { Nav } from "@/components/nav";
-import { Footer } from "@/components/footer";
 import { Check, Copy, ShieldCheck, Grid2X2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/header";
@@ -217,7 +215,6 @@ function HomeContent() {
 
   return (
     <div className="flex flex-col min-h-screen p-4 sm:p-6 md:p-8 font-[family-name:var(--font-main)]">
-      <Nav/>
       <Header/>
       <div className="flex-1 w-full max-w-[1600px] mx-auto py-8">
         <div className="flex justify-start mb-6">
@@ -318,7 +315,6 @@ function HomeContent() {
           ))}
         </main>
       </div>
-      <Footer />
       <AnimatePresence>
         {isModalOpen && selectedServer && (
           <Modal server={selectedServer} onClose={handleCloseModal} />

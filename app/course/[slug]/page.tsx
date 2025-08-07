@@ -1,114 +1,108 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
+import { CustomMDX } from '@/components/mdx'
+import { getCourseModules } from '../utils'
 
-interface PageProps {
-  params: Promise<{
-    slug: string
-  }>
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
+export async function generateStaticParams() {
+  const modules = getCourseModules()
+
+  return modules.map((module) => ({
+    slug: module.slug,
+  }))
 }
 
-interface UnitData {
-  title: string
-  content: string
-  frontmatter: Record<string, unknown>
-}
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const courseModule = getCourseModules().find((module) => module.slug === params.slug)
+  if (!courseModule) {
+    return
+  }
 
-async function getUnitBySlug(slug: string): Promise<UnitData | null> {
-  try {
-    // Parse the slug to get unit directory and file name
-    const [unitDir, fileName] = slug.split('/')
-    
-    if (!unitDir || !fileName) {
-      return null
-    }
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = courseModule.metadata
+  const ogImage = image
+    ? image
+    : `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
-    const filePath = path.join(process.cwd(), 'app/course/units', unitDir, `${fileName}.mdx`)
-    
-    if (!fs.existsSync(filePath)) {
-      return null
-    }
-
-    const source = fs.readFileSync(filePath, 'utf8')
-    const { data: frontmatter, content } = matter(source)
-    
-    // Extract title from the first heading or use filename
-    const titleMatch = content.match(/^#\s+(.+)$/m)
-    const title = titleMatch ? titleMatch[1] : fileName
-    
-    return {
+  return {
+    title,
+    description,
+    openGraph: {
       title,
-      content,
-      frontmatter
-    }
-  } catch (error) {
-    console.error('Error reading unit file:', error)
-    return null
+      description,
+      type: 'article',
+      publishedTime,
+      url: `${baseUrl}/course/${courseModule.slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   }
 }
 
-export default async function UnitPage({ params }: PageProps) {
-  const { slug } = await params
-  const unit = await getUnitBySlug(slug)
-  
-  if (!unit) {
+export default async function CourseModule({ params }: { params: { slug: string } }) {
+  const courseModule = getCourseModules().find((module) => module.slug === params.slug)
+
+  if (!courseModule) {
     notFound()
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <nav className="mb-6">
-            <Link 
-              href="/course/units" 
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              ← Back to Course
-            </Link>
-          </nav>
-          
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {unit.title}
-          </h1>
-        </div>
-
-        <article className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="p-8">
-            <div className="prose prose-lg max-w-none">
-              <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
-                {unit.content}
-              </div>
-            </div>
+    <section className="items-center justify-center">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Course',
+            headline: courseModule.metadata.title,
+            datePublished: courseModule.metadata.publishedAt,
+            dateModified: courseModule.metadata.publishedAt,
+            description: courseModule.metadata.summary,
+            image: courseModule.metadata.image
+              ? `${baseUrl}${courseModule.metadata.image}`
+              : `/og?title=${encodeURIComponent(courseModule.metadata.title)}`,
+            url: `${baseUrl}/course/${courseModule.slug}`,
+            author: {
+              '@type': 'Person',
+              name: 'CAMEL MCP Course',
+            },
+          }),
+        }}
+      />
+      <div className="max-w-[900px] min-h-screen mx-auto justify-center items-center py-24">
+        <div className="flex flex-col items-center rounded-xl gap-8 w-full">
+        <h1 className="title font-semibold text-4xl tracking-tighter leading-tight text-center font-[family-name:var(--font-main)]">
+          {courseModule.metadata.title || `Module ${courseModule.slug}`}
+        </h1>
+        {courseModule.metadata.publishedAt && (
+          <div className="flex flex-row justify-center gap-8 w-full items-center mt-2 mb-8 text-sm border-b border-neutral-200 pt-2 pb-8 font-[family-name:var(--font-mono)]">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              <span className="font-bold italic mr-2">Written by</span> {courseModule.metadata.author || 'CAMEL-AI'}
+            </p>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              <span className="font-bold italic mr-2">Reviewed by</span> {courseModule.metadata.reviewer || 'CAMEL-AI'}
+            </p>
           </div>
+        )}
+        </div>
+        <article className="prose prose-lg max-w-none font-[family-name:var(--font-sans)]">
+          {await CustomMDX({ source: courseModule.content })}
         </article>
       </div>
-    </div>
+    </section>
   )
-}
-
-// Generate static params for all units
-export async function generateStaticParams() {
-  const unitsDir = path.join(process.cwd(), 'app/course/units')
-  const unitDirs = fs.readdirSync(unitsDir).filter(dir => 
-    fs.statSync(path.join(unitsDir, dir)).isDirectory() && dir.startsWith('unit')
-  )
-
-  const params: { slug: string }[] = []
-
-  for (const unitDir of unitDirs) {
-    const unitPath = path.join(unitsDir, unitDir)
-    const files = fs.readdirSync(unitPath).filter(file => file.endsWith('.mdx'))
-    
-    for (const file of files) {
-      const fileName = file.replace('.mdx', '')
-      params.push({
-        slug: `${unitDir}/${fileName}`
-      })
-    }
-  }
-
-  return params
 }

@@ -129,35 +129,35 @@
   }
   
   .prose h1 {
-    @apply text-3xl font-bold mb-6 mt-8;
+    @apply text-3xl font-bold mb-6 mt-12 font-[family-name:var(--font-main)];
   }
   
   .prose h2 {
-    @apply text-2xl font-semibold mb-4 mt-6;
+    @apply text-2xl font-bold mb-6 mt-12 font-[family-name:var(--font-main)];
   }
   
   .prose h3 {
-    @apply text-xl font-semibold mb-3 mt-5;
+    @apply text-xl font-semibold mb-3 mt-5 font-[family-name:var(--font-main)];
   }
   
   .prose h4 {
-    @apply text-lg font-semibold mb-2 mt-4;
+    @apply text-lg font-semibold mb-2 mt-4 font-[family-name:var(--font-main)];
   }
   
   .prose p {
-    @apply mb-4 leading-relaxed;
+    @apply mb-4 leading-relaxed font-[family-name:var(--font-sans)];
   }
   
   .prose ul {
-    @apply mb-4 list-disc list-inside;
+    @apply mb-4 list-disc list-inside font-[family-name:var(--font-sans)];
   }
   
   .prose ol {
-    @apply mb-4 list-decimal list-inside;
+    @apply mb-4 list-decimal list-inside font-[family-name:var(--font-sans)];
   }
   
   .prose li {
-    @apply mb-1;
+    @apply mb-1 font-[family-name:var(--font-sans)];
   }
   
   .prose blockquote {
@@ -181,7 +181,7 @@
   }
   
   .prose img {
-    @apply rounded-lg shadow-md mb-4;
+    @apply rounded-lg shadow-md mb-4 w-full;
   }
   
   .prose table {
