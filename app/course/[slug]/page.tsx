@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from '@/components/mdx'
 import { getCourseModules } from '../utils'
+import { Button } from '@/components/button'
+import Link from 'next/link'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
@@ -55,11 +57,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CourseModule({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const courseModule = getCourseModules().find((module) => module.slug === slug)
+  const allModules = getCourseModules()
+  const courseModule = allModules.find((module) => module.slug === slug)
 
   if (!courseModule) {
     notFound()
   }
+
+  // Find current module index
+  const currentIndex = allModules.findIndex((module) => module.slug === slug)
+  const prevModule = currentIndex > 0 ? allModules[currentIndex - 1] : null
+  const nextModule = currentIndex < allModules.length - 1 ? allModules[currentIndex + 1] : null
 
   return (
     <section className="items-center justify-center">
@@ -85,6 +93,8 @@ export default async function CourseModule({ params }: { params: Promise<{ slug:
           }),
         }}
       />
+      <div className="flex flex-col items-center rounded-xl gap-8 w-full py-12">
+      </div>
       <div className="max-w-[900px] min-h-screen mx-auto justify-center items-center py-24">
         <div className="flex flex-col items-center rounded-xl gap-8 w-full">
         <h1 className="title font-semibold text-4xl tracking-tighter leading-tight text-center font-[family-name:var(--font-main)]">
@@ -101,9 +111,33 @@ export default async function CourseModule({ params }: { params: Promise<{ slug:
           </div>
         )}
         </div>
-        <article className="prose prose-lg max-w-none font-[family-name:var(--font-sans)]">
+        <article className="prose prose-lg pb-12 max-w-none font-[family-name:var(--font-sans)]">
           {await CustomMDX({ source: courseModule.content })}
         </article>
+        <div className="flex flex-row w-full py-12 justify-between border-t border-neutral-200">
+          {prevModule ? (
+            <Link href={`/course/${prevModule.slug}`}>
+              <Button variant="default" className="rounded-full">
+                Previous
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="default" disabled className="rounded-full">
+              Previous
+            </Button>
+          )}
+          {nextModule ? (
+            <Link href={`/course/${nextModule.slug}`}>
+              <Button variant="default" className="rounded-full">
+                Next: {nextModule.metadata.title}
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="default" disabled className="rounded-full">
+              End
+            </Button>
+          )}
+        </div>
       </div>
     </section>
   )
