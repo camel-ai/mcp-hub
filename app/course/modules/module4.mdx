@@ -41,7 +41,7 @@ def add(a: int, b: int) -> int:
     return a + b
 
 # Define a resource for personalized greetings
-@mcp.resource("greeting://{name}")
+@mcp.resource("greeting://user")
 def get_greeting(name: str) -> str:
     """Get a personalized greeting."""
     return f"Hello, {name}!"
@@ -53,7 +53,7 @@ def get_greeting(name: str) -> str:
 Decorators are like labels that tell FastMCP how to use your functions. Here’s what they do:
 
 - `@mcp.tool():` Makes a function a tool for actions like calculations, using docstrings and type hints to define it.
-- `@mcp.resource():` Sets up a data source, like a message, accessible via a URI (e.g., greeting://{name}).
+- `@mcp.resource():` Sets up a data source, like a message, accessible via a URI (e.g., greeting://user).
 - `@mcp.prompt():` Creates a template to guide AI responses, such as for questions or summaries.
 
 **Why Different?**

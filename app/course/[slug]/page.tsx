@@ -12,8 +12,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const courseModule = getCourseModules().find((module) => module.slug === params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const courseModule = getCourseModules().find((module) => module.slug === slug)
   if (!courseModule) {
     return
   }
@@ -52,8 +53,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-export default async function CourseModule({ params }: { params: { slug: string } }) {
-  const courseModule = getCourseModules().find((module) => module.slug === params.slug)
+export default async function CourseModule({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const courseModule = getCourseModules().find((module) => module.slug === slug)
 
   if (!courseModule) {
     notFound()
