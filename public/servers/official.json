@@ -287,6 +287,17 @@
     "homepage": "https://github.com/stripe/agent-toolkit"
   },
   {
+    "name": "Sunra AI",
+    "key": "sunra-mcp-server",
+    "description": "Sunra.ai is a generative media platform built for developers, providing high-performance AI model inference capabilities. It specializes in running diffusion models through production-ready APIs and interactive UI playgrounds.",
+    "command": "npx",
+    "args": ["-y", "@sunra/mcp-server"],
+    "env": {
+      "SUNRA_KEY": "{{apiKey@string::Your Sunra.ai API key, optional if you set the SUNRA_KEY environment variable system wide}}"
+    },
+    "homepage": "https://github.com/sunra-ai/sunra-clients/tree/main/mcp-server"
+  },
+  {
     "name": "Tavily Search",
     "key": "tavily-search",
     "description": "Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.",
