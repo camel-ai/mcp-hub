@@ -342,5 +342,20 @@
     "command": "npx",
     "args": ["-y", "@microsoft/mcp-server-vscode"],
     "homepage": "https://github.com/microsoft/semanticworkbench/tree/HEAD/mcp-servers/mcp-server-vscode"
+  },
+  {
+    "name": "OceanBase",
+    "key": "oceanbase",
+    "description": "OceanBase is a distributed relational database open-sourced by Alibaba, supporting financial-grade high availability and horizontal scalability, and is compatible with the MySQL/Oracle protocols.",
+    "command": "uvx",
+    "args": ["oceanbase-mcp-server"],
+    "env": {
+      "OB_HOST": "{{host@string::Your OceanBase host}}",
+      "OB_PORT": "{{port@string::Your OceanBase port}}",
+      "OB_USER": "{{user@string::Your OceanBase username}}",
+      "OB_PASSWORD": "{{password@string::Your OceanBase password}}",
+      "OB_DATABASE": "{{database@string::Your OceanBase database name}}"
+    },
+    "homepage": "https://github.com/oceanbase/awesome-oceanbase-mcp/tree/main/src/oceanbase_mcp_server"
   }
 ]
