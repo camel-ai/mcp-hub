@@ -342,5 +342,17 @@
     "command": "npx",
     "args": ["-y", "@microsoft/mcp-server-vscode"],
     "homepage": "https://github.com/microsoft/semanticworkbench/tree/HEAD/mcp-servers/mcp-server-vscode"
+  },
+  {
+    "name": "DINO-X",
+    "key": "dinox",
+    "description": "Empower LLMs with fine-grained visual understanding based on object detection APIs.",
+    "command": "npx",
+    "args": ["-y", "@deepdataspace/dinox-mcp"],
+    "env": {
+      "DINOX_API_KEY": "{{apiKey@string::Your DINO-X API key from https://cloud.deepdataspace.com/}}",
+      "IMAGE_STORAGE_DIRECTORY": "{{directory@string::Your Local Path to Save Images (if needed)}}"
+    },
+    "homepage": "https://github.com/IDEA-Research/DINO-X-MCP"
   }
 ]
