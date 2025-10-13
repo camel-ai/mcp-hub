@@ -370,7 +370,6 @@
     "homepage": "https://github.com/oceanbase/awesome-oceanbase-mcp/tree/main/src/oceanbase_mcp_server"
   },  
   {
-    "homepage": "https://github.com/oceanbase/awesome-oceanbase-mcp/tree/main/src/oceanbase_mcp_server"
     "name": "DINO-X",
     "key": "dinox",
     "description": "Empower LLMs with fine-grained visual understanding based on object detection APIs.",
