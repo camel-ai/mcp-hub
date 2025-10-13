@@ -287,6 +287,17 @@
     "homepage": "https://github.com/stripe/agent-toolkit"
   },
   {
+    "name": "Sunra AI",
+    "key": "sunra-mcp-server",
+    "description": "Sunra.ai is a generative media platform built for developers, providing high-performance AI model inference capabilities. It specializes in running diffusion models through production-ready APIs and interactive UI playgrounds.",
+    "command": "npx",
+    "args": ["-y", "@sunra/mcp-server"],
+    "env": {
+      "SUNRA_KEY": "{{apiKey@string::Your Sunra.ai API key, optional if you set the SUNRA_KEY environment variable system wide}}"
+    },
+    "homepage": "https://github.com/sunra-ai/sunra-clients/tree/main/mcp-server"
+  },
+  {
     "name": "Tavily Search",
     "key": "tavily-search",
     "description": "Integrates with Tavily API to provide real-time web search and content extraction capabilities for research, aggregation, and fact-checking tasks.",
@@ -357,5 +368,15 @@
       "OB_DATABASE": "{{database@string::Your OceanBase database name}}"
     },
     "homepage": "https://github.com/oceanbase/awesome-oceanbase-mcp/tree/main/src/oceanbase_mcp_server"
+    "name": "DINO-X",
+    "key": "dinox",
+    "description": "Empower LLMs with fine-grained visual understanding based on object detection APIs.",
+    "command": "npx",
+    "args": ["-y", "@deepdataspace/dinox-mcp"],
+    "env": {
+      "DINOX_API_KEY": "{{apiKey@string::Your DINO-X API key from https://cloud.deepdataspace.com/}}",
+      "IMAGE_STORAGE_DIRECTORY": "{{directory@string::Your Local Path to Save Images (if needed)}}"
+    },
+    "homepage": "https://github.com/IDEA-Research/DINO-X-MCP"
   }
 ]
