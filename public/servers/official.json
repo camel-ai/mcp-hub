@@ -367,6 +367,7 @@
       "OB_PASSWORD": "{{password@string::Your OceanBase password}}",
       "OB_DATABASE": "{{database@string::Your OceanBase database name}}"
     },
+    "homepage": "https://github.com/oceanbase/awesome-oceanbase-mcp/tree/main/src/oceanbase_mcp_server"
   },  
   {
     "homepage": "https://github.com/oceanbase/awesome-oceanbase-mcp/tree/main/src/oceanbase_mcp_server"
