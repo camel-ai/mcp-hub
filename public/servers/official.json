@@ -34,6 +34,25 @@
     "homepage": "https://github.com/microsoft/semanticworkbench/tree/HEAD/mcp-servers/mcp-server-bing-search"
   },
   {
+    "name": "Browserless",
+    "key": "browserless",
+    "description": "Headless browser automation for AI agents — navigate, scrape, fill forms, screenshot, search the web, and run multi-step browser research via a stateful agent loop. 9 tools backed by the Browserless cloud.",
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://mcp.browserless.io/mcp",
+      "--transport",
+      "http-only",
+      "--header",
+      "Authorization:${AUTH_HEADER}"
+    ],
+    "env": {
+      "AUTH_HEADER": "{{apiToken@string::Bearer <your token from https://www.browserless.io/signup/email>}}"
+    },
+    "homepage": "https://www.browserless.io/"
+  },
+  {
     "name": "Cloudflare",
     "key": "cloudflare",
     "description": "Manage KV stores, R2 storage, D1 databases, and Workers deployments.",
