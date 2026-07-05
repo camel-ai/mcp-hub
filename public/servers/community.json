@@ -15,8 +15,17 @@
     "name": "VedaVisor Vedic Astrology MCP",
     "key": "vedavisor-vedic-astrology-mcp",
     "description": "Hosted Vedic astrology MCP server with 22 tools for birth charts, dashas, yogas, compatibility, panchanga, muhurta, prashna, and chart-aware Cosmic Advisor interpretation.",
-    "command": "remote",
-    "args": ["https://mcp.vedavisor.com/mcp"],
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://mcp.vedavisor.com/mcp",
+      "--header",
+      "Authorization: Bearer ${VEDAVISOR_MCP_API_KEY}"
+    ],
+    "env": {
+      "VEDAVISOR_MCP_API_KEY": "apiKey@string::Your VedaVisor MCP API key"
+    },
     "homepage": "https://github.com/dchhill/vedavisor-vedic-astrology-mcp"
   }
 ]
